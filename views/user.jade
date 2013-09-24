@@ -1,0 +1,33 @@
+extends layout 
+
+block content
+	link(rel='stylesheet', href='css/user.css')
+	.container-fluid
+		.row-fluid(align='center')
+			#board_left.span3
+				#avatar
+					img(src=user.img)
+				#avatar_name
+					span=user.name
+			#board_right.span9
+				.span12
+					ul#mayTab.nav.nav-tabs
+						li.active
+							a#a(data-toggle='tab') 我的商品
+						li
+							a#b(data-toggle='tab') 追蹤商品
+						li
+							a#c(data-toggle='tab') 交易完成
+					.my-box
+						div(style='display:none;')
+							#inline_content
+								h4 loading...
+						#my-item.show.span12
+						#my-follow.hide.span12
+						#my-history.hide.span12
+
+block scripts
+	script(src='js/lib/doT.min.js', type='text/javascript')
+	script(src='js/user.js', type='text/javascript')
+
+

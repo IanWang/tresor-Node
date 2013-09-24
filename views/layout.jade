@@ -1,0 +1,52 @@
+!!!
+html
+	head
+		title tresor@NodeJS
+		meta(charset='utf-8')
+		meta(name='viewport', content='width=device-width,initial-scale=1.0')
+		link(rel='stylesheet', href='/css/bootstrap.css')
+		link(rel='stylesheet', href='/css/bootstrap-responsive.css')
+		link(rel='stylesheet', href='/css/colorbox.css')
+		script(src='/js/lib/jquery-1.9.1.min.js')
+		script(src='/js/lib/jquery.colorbox.min.js')
+		script(src='/js/lib/bootstrap.min.js', type='text/javascript')
+		style.
+			body {
+				background:url(/img/fbg.png) repeat;
+				padding-top: 60px;
+			}
+	body
+		.navbar.navbar-fixed-top
+			.navbar-inner
+				.container-fluid
+					a.btn.btn-navbar(href="#", data-toggle="collapse", data-target=".nav-collapse")
+						span.icon-th-list 
+					a.brand(href='/')
+						em trésor
+					.nav-collapse.collapse
+						ul.nav.pull-right
+							li 
+								a(href='/') 首頁
+							li 
+								a(href='/user') 追蹤
+							li 
+								a(href='/create') 新增
+							li 
+								a(href='/logout') 登出
+		block content
+		#footer
+	block scripts	
+	script.
+		$(document).ready(function(){
+			var current = window.location.href.split('/');
+			var where = '/' + current[current.length-1];
+			$('.nav li a').each(function(){
+				var href = $(this).attr('href');
+				if(where === href) {
+					$('.nav li').removeClass("active");
+					$(this).parent().addClass("active");
+				}
+			});
+		});
+						
+

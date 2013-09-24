@@ -1,0 +1,16 @@
+extends layout 
+block content
+	link(rel='stylesheet', href='/css/window.css')
+	.row-fluid
+		.span12
+			div(style='display:none;')
+				#inline_content
+					h5 loading...
+			.masonry(style='margin: 0 auto;')
+	.end
+		h5 END OF PRODUCTS!
+
+block scripts
+	script(src='js/lib/jquery.masonry.min.js')
+	script(src='js/lib/doT.min.js')
+	script(src='js/window.js')
