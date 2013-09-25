@@ -97,6 +97,9 @@ a {
 	-moz-animation: fadein 0.6s;
 	-webkit-animation: fadein 0.6s;
 }
+#filter {
+	margin-left: 93%;
+}
 @keyframes fadein {
 	from {opacity:0;}
 	to {opacity:1;}

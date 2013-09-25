@@ -1,112 +1,121 @@
-link(rel='stylesheet', href='/css/popup_window.css')
-.wrapper(style='width: 99.9% !important; overflow-x: hidden;')
-	.main.clearfix
-		.main-content.panel#panel1
-			.content-header
-				h1=item.name
-				p=item.date
-			.content-body
-				.imgContainer
-					img(src=item.img[0].full)
-				.picbar
-					- each pic in item.img
-						img(src=pic.thumb, rel=pic.full)
-						
-			.content-footer
-				.discus
-					h1 DISCQS AREA
-		.sidebar-content
-			.sb-block.A
-				.owner.clearfix
-					#userAvatar 
-						a(href='#')
-							img(src=item.ownerPic)
-					#userInfo
-						#userName=item.owner
-			.panel#panel2
-				if msg
-					.sb-block.D
-						.DHead
-							p=msg
-				else if waitList	
-					.sb-block.D
-						.DHead
-							p=line
-						.listBlock.clearfix
-							ul
-								if confirmList
-									each confirm in confirmList
-										li(id='wlist-#{confirm.id}')
-											img(src=confirm.img)
-											span.buyerName=confirm.name
-											.btnGroup(data-id=confirm.id, data-fb=confirm.fb)
-												a.SsendMsg.FromSeller.btn(href='#myModal', role='button', data-toggle='modal')
+body
+	script.
+		(function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) return;
+		js = d.createElement(s); js.id = id;
+		js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=365913330182067";
+		fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+					
+	link(rel='stylesheet', href='/css/popup_window.css')
+	#fb-root
+	.wrapper(style='width: 99.9% !important; overflow-x: hidden;')
+		.main.clearfix
+			.main-content.panel#panel1
+				.content-header
+					h1=item.name
+					p=item.date
+				.content-body
+					.imgContainer
+						img(src=item.img[0].full)
+					.picbar
+						- each pic in item.img
+							img(src=pic.thumb, rel=pic.full)
+							
+				.content-footer
+					.fb-comments(data-href="http://tresor.tw/product/#{item.id}/", data-width="620")
+			.sidebar-content
+				.sb-block.A
+					.owner.clearfix
+						#userAvatar 
+							a(href='#')
+								img(src=item.ownerPic)
+						#userInfo
+							#userName=item.owner
+				.panel#panel2
+					if msg
+						.sb-block.D
+							.DHead
+								p=msg
+					else if waitList	
+						.sb-block.D
+							.DHead
+								p=line
+							.listBlock.clearfix
+								ul
+									if confirmList
+										each confirm in confirmList
+											li(id='wlist-#{confirm.id}')
+												img(src=confirm.img)
+												span.buyerName=confirm.name
+												.btnGroup(data-id=confirm.id, data-fb=confirm.fb)
+													a.SsendMsg.FromSeller.btn(href='#myModal', role='button', data-toggle='modal')
+														i.icon-envelope
+													.sUncon.btn.btn-primary 取消
+													.sCon.btn.btn-primary(style='display:none') 完成
+									each buyer in waitList
+										li(id='wlist-#{buyer.id}')
+											img(src=buyer.img)
+											span.buyerName=buyer.name
+											.btnGroup(data-id=buyer.id, data-fb=buyer.fb)
+												a.lightSendMsg.FromSeller.btn(href='#myModal', role='button', data-toggle='modal')
 													i.icon-envelope
-												.sUncon.btn.btn-primary 取消
-												.sCon.btn.btn-primary(style='display:none') 完成
-								each buyer in waitList
-									li(id='wlist-#{buyer.id}')
-										img(src=buyer.img)
-										span.buyerName=buyer.name
-										.btnGroup(data-id=buyer.id, data-fb=buyer.fb)
-											a.lightSendMsg.FromSeller.btn(href='#myModal', role='button', data-toggle='modal')
-												i.icon-envelope
-											.sCon.btn.btn-primary 完成
-											.sUncon.btn.btn-primary(style='display: none') 取消
-				else
-					.sb-block.C
-						if inConfirm
-							.unconfirm.btn.tranBtn 取消完成
-							.buy.btn.btn-danger.tranBtn(style='display:none')
-								i.icon-plus-sign.icon-white 
-								&nbsp加入排
-							.confirm.tranBtn.btn(style='display:none') 完成
-							.dequeue.tranBtn.btn(style='display:none') 退出排
-						else if inWait
-							.confirm.btn.tranBtn 完成
-							.dequeue.btn.tranBtn 退出排
-							.buy.btn.btn-danger.tranBtn(style='display:none')
-								i.icon-plus-sign.icon-white 
-								&nbsp加入排
-							.unconfirm.btn.tranBtn(style='display:none') 取消完成
-						else
-							.buy.btn.btn-danger.tranBtn
-								i.icon-plus-sign.icon-white 
-								&nbsp加入排
-							.confirm.tranBtn.btn(style='display:none') 完成
-							.dequeue.tranBtn.btn(style='display:none') 退出排
-							.unconfirm.tranBtn.btn(style='display:none') 取消完成
-						a.sendMsg.btn(data-toggle='modal')
-							i.icon-envelope 
-							&nbsp訊息
-						.line
-							if line
-								p
-									| 現有
-									strong= line
-									|  人排隊中。
-				.sb-block.B
-					.product-info
-						ul
-							li
-								label 價格：
-								span#price= item.soldPrice
-									span   TWD
-								span.bought （原價&nbsp
-									span#bought= item.boughtPrice
-									元）
-							li
-								label 類別：
-								span#category=item.type
-							li
-								label 尺寸：
-								span#size=item.size
-							li
-								label 狀態：
-								span#status=item.status
-							li
-								label 描述：
-								#des=item.description
-script(src='/js/product.js', type='text/javascript')
-script(src='/js/lib/bootstrap.min.js', type='text/javascript')
-				
+												.sCon.btn.btn-primary 完成
+												.sUncon.btn.btn-primary(style='display: none') 取消
+					else
+						.sb-block.C
+							if inConfirm
+								.unconfirm.btn.tranBtn 取消完成
+								.buy.btn.btn-danger.tranBtn(style='display:none')
+									i.icon-plus-sign.icon-white 
+									&nbsp加入排
+								.confirm.tranBtn.btn(style='display:none') 完成
+								.dequeue.tranBtn.btn(style='display:none') 退出排
+							else if inWait
+								.confirm.btn.tranBtn 完成
+								.dequeue.btn.tranBtn 退出排
+								.buy.btn.btn-danger.tranBtn(style='display:none')
+									i.icon-plus-sign.icon-white 
+									&nbsp加入排
+								.unconfirm.btn.tranBtn(style='display:none') 取消完成
+							else
+								.buy.btn.btn-danger.tranBtn
+									i.icon-plus-sign.icon-white 
+									&nbsp加入排
+								.confirm.tranBtn.btn(style='display:none') 完成
+								.dequeue.tranBtn.btn(style='display:none') 退出排
+								.unconfirm.tranBtn.btn(style='display:none') 取消完成
+							a.sendMsg.btn(data-toggle='modal')
+								i.icon-envelope 
+								&nbsp訊息
+							.line
+								if line
+									p
+										| 現有
+										strong= line
+										|  人排隊中。
+					.sb-block.B
+						.product-info
+							ul
+								li
+									label 價格：
+									span#price= item.soldPrice
+										span   TWD
+									span.bought （原價&nbsp
+										span#bought= item.boughtPrice
+										元）
+								li
+									label 類別：
+									span#category=item.type
+								li
+									label 尺寸：
+									span#size=item.size
+								li
+									label 狀態：
+									span#status=item.status
+								li
+									label 描述：
+									#des=item.description
+	script(src='/js/product.js', type='text/javascript')
+	script(src='/js/lib/bootstrap.min.js', type='text/javascript')

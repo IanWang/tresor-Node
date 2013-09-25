@@ -49,7 +49,13 @@ $(function() {
 		var name = $('#p-name').val();
 		var gender = $('#p-gender').val();
 		var type = $('#p-type').val();
-		var size = $('#p-size').val() || $('#p-shoes-size').val();
+		
+		if($('#p-shoes-size').val()) {
+			var size = $('#p-shoes-size').val();
+		} else {
+			var size = $('#p-size').val();
+		}
+
 		var status = $('#p-status').val();
 		var description = $('#p-des').val();
 		var buy = parseInt($('#p-bought').val(), 10);
@@ -102,7 +108,9 @@ $(function() {
 						console.log(data);
 						console.log(objId);
 						myDropzone.processQueue();
-						console.log('新增成功');
+						alert('新增成功');
+						window.location = '/';
+
 					}
 				},
 				error: function(res){

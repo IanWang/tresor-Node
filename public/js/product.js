@@ -1,11 +1,11 @@
-	var defaultPath = '/';
+	
 	var getUrl = $(location).attr('href').split('/');
-  var id = getUrl[getUrl.length-1];
+  var lastStr = getUrl[getUrl.length-1];
 	var apiUrl = '/action';
 	var query = {};
 	var count;
-
-	query.status = { action: 'get_status', method: 'get', id: id };
+	
+  var id = (lastStr === '') ? getUrl[getUrl.length-2] : lastStr;
 	query.bQueue = { action: 'queue', id: id };
 	query.bDequeue   = { action: 'dequeue', id: id };
 	query.bConfirm   = { action: 'confirm', id: id };
@@ -13,7 +13,7 @@
 	query.sConfirm   = { action: 'confirm', id: id };
 	query.sUnconfirm = { action: 'unconfirm', id: id };
 
-	$('.picbar img').click(function(){
+	$('.picbar img').hover(function(){
 		$('.imgContainer').empty();
 		var url = $(this).attr('rel');
 		$('.imgContainer').append('<img src="' + url + '" style="display: none;"/>');

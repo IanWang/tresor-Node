@@ -1,24 +1,21 @@
 $(function() {
 	var selector = $(".masonry");
 	var isEnd = false;
-	var next = {};
+	var query = {};
 	var getProductRunning = false;
-	var getProduct = function(callback) {
+	var getProduct = function(q, callback) {
 		getProductRunning = true;
-		console.log(isEnd);
-		if (isEnd)
-			return console.log(0);
-		else
+		if(!isEnd)
 			return $.ajax({
 				url : '/allProduct',
 				type : 'GET',
 				contentType : 'application/json',
-				data: next,
+				data: q,
 				dataType : 'json',
 				success : function(data) {
-					next.page = data.meta.next;
+					q.page = data.meta.next;
 					ajaxCallback(data);
-					if (next.page != null) {
+					if (q.page != null) {
 						return ;
 					} else {
 						isEnd = true;
@@ -83,7 +80,7 @@ $(function() {
 		$(window).scroll(function() {
     	if ($(window).scrollTop() >= $(document).height() - $(window).height() - 300) {
       	if(!getProductRunning) {
-					getProduct(ajaxCallback);
+					getProduct(query, ajaxCallback);
 				}
       }
     });
@@ -92,6 +89,16 @@ $(function() {
 	$(window).resize(function() {
 		selector.masonry('reload');
 	});
+
+	$('#filter .dropdown-menu li').click(function(){
+		$('.masonry').empty();
+		var anchor = $(this).find('a');
+		var thisType = anchor.attr('data-type');
+		query.type = thisType;
+		isEnd = false;
+		getProduct(query, ajaxCallback);
+	});
+
 
 });
 

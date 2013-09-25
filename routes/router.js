@@ -11,23 +11,23 @@ var v1 = 'http://pa4373.ribosome.com.tw:8000/api/v1';
 var getUrl = '/product/';
 var userUrl = '/user/';
 var uploadImg = '/imageupload/';
-var landing = 'http://pa4373.ribosome.com.tw:8000';
+//var landing = '/login';
+var landing = apiUrl;
 var logout = 'http://pa4373.ribosome.com.tw:8000/logout';
 
 var logger = new (winston.Logger)({
 	exitOnError: false,
-	handleExceptions: true,
 	transports: [
 		new (winston.transports.File)({ 
-			filename: '../logs.log', 
-			level: 'error' 
+			filename: '../logs.log' 
 		})
 	]
 });
 
 exports.index = function(req, res){
 	if(req.session.user && req.session.key) {
-		logger.info('user in:', req.session.user);
+		console.log('user in:', req.session.user);
+		console.log(req.session.key);
 		res.render('main');
 	} else {
 		res.redirect(landing);
@@ -39,10 +39,19 @@ exports.allProduct = function(req, res){
 	if(req.session.user && req.session.key) {
 		var key = req.session.key;
 		var user = req.session.user;
+		var filter = req.query.type || null;
 		var onSell = '?transaction_status=on';
 		var pUser = '&api_key=' + key + '&username=' + user;
 		var reqPath = v1 + getUrl + onSell + pUser;
 		
+		if(filter) {
+			if(filter === 'all') {
+				reqPath = v1 + getUrl + onSell + pUser;
+			} else {
+				reqPath += '&type=' + filter;	
+			}
+		}
+
 		if(req.query.page) {
 			reqPath = apiUrl + req.query.page;
 		}
@@ -59,11 +68,15 @@ exports.allProduct = function(req, res){
 exports.userProduct = function(req, res){
 	
 	if(req.session.user && req.session.key) {
+		
 		var key = req.session.key;
 		var user = req.session.user;
-		var pUser = '?api_key=' + key + '&username=' + user +'&seller_username=' + user;
+		var type = req.query.type;
+
+		var pUser = '?api_key=' + key + '&username=' + user + type + user;
 		var reqPath = v1 + getUrl + pUser;
-		
+		console.log(reqPath);
+
 		if(req.query.page) {
 			reqPath = apiUrl + req.query.page;
 		}
@@ -195,12 +208,14 @@ exports.product = function(req, res){
 
 			d.img = [];
 			d.name = product.title;
+			d.id = product.id;
 			d.soldPrice = product.sold_price;
 			d.boughtPrice = product.bought_price;
 			d.type = product.resource_type;
-			d.size = product.size || '';
+			d.size = product.size || '--';
 			d.status = product.product_status;
 			d.description = product.description;
+			d.tranStatus = product.transaction_status;
 			d.owner = product.seller.facebook_name;
 			d.ownerPic = product.seller.image;
 			d.ownerFbId = product.seller.facebook_id;
@@ -225,6 +240,12 @@ exports.product = function(req, res){
 				d.date = moment(product.date_added, "YYYY-MM-DDTHH:mm:ss").fromNow();
 			}
 
+			if(d.tranStatus === 'closed') {
+				res.render(render, {
+					item: d,
+					closed: true
+				});
+			}
 
 			// if the user is seller
 			if(product.seller.username === req.session.user) {
@@ -428,6 +449,8 @@ exports.logout = function(req, res){
 	}
 }
 
-
+exports.landing = function(req, res) {
+	res.render('landing');
+}
 
 

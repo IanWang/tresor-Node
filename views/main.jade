@@ -3,6 +3,35 @@ block content
 	link(rel='stylesheet', href='/css/window.css')
 	.row-fluid
 		.span12
+			.btn-group#filter
+				a.btn.dropdown-toggle(data-toggle='dropdown', href='#') 
+					分類&nbsp
+					span.caret
+				ul.dropdown-menu.pull-right
+					li
+						a(data-type='all') 全部
+					li
+						a(data-type='textbook') **教科書**
+					li
+						a(data-type='clothes') 上衣
+					li
+						a(data-type='coat') 外套
+					li
+						a(data-type='pantskirt') 褲裙
+					li
+						a(data-type='dress') 連身裝
+					li
+						a(data-type='shoes') 鞋類
+					li
+						a(data-type='accessories') 飾品
+					li
+						a(data-type='cosmeceutical') 藥妝
+					li
+						a(data-type='electronics') 3C產品
+					li	
+						a(data-type='book') 一般書籍
+					li
+						a(data-type='others') 其他
 			div(style='display:none;')
 				#inline_content
 					h5 loading...

@@ -39,6 +39,7 @@ app.get('/user', router.user);
 app.get('/product/:id', router.product);
 app.get('/main', router.index);
 app.post('/upload', router.uploadImg);
+app.get('/login', router.landing);
 app.get('/logout', router.logout);
 
 
