@@ -13,7 +13,7 @@
 	query.sConfirm   = { action: 'confirm', id: id };
 	query.sUnconfirm = { action: 'unconfirm', id: id };
 
-	$('.picbar img').hover(function(){
+	$('.picbar img').mouseenter(function(){
 		$('.imgContainer').empty();
 		var url = $(this).attr('rel');
 		$('.imgContainer').append('<img src="' + url + '" style="display: none;"/>');
@@ -114,6 +114,9 @@
 		$('.modal-footer a').attr('href', link);
 	});
 
+	if($('#comments')) {
+		changePluginUrl(id);
+	}
 	function Ajax(url, query, cb){
 		$.ajax({
 			url: url,
@@ -121,6 +124,15 @@
 			data: query,
 			dataType: "json",
 			success: cb
+		});
+	}
+
+	function changePluginUrl(value) {
+		var newVal = '<fb:comments href="http://tresor.tw/product/' + value + '" num_posts="20" width="690"></fb:comments>';
+		console.log(newVal);
+		$('#comments').html(newVal);
+		FB.XFBML.parse($('#comments').get(0),function(){
+			$(".FB_Loader").remove();
 		});
 	}
 
