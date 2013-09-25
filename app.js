@@ -12,12 +12,12 @@ app.configure(function(){
 	app.set('views', __dirname + '/views');
 	app.set('view engine', 'jade');
 	app.use(express.bodyParser());
-	//app.use(express.logger('dev'));
+	app.use(express.logger('dev'));
 	app.use(express.cookieParser('Secret-of-tresor-Login'));
 	app.use(express.cookieSession());
 	app.use(express.methodOverride());
 	app.use(app.router);
-	app.use(express.static(path.join(__dirname, 'public')));
+	//app.use(express.static(path.join(__dirname, 'public')));
 });
 
 app.configure('development', function(){
@@ -39,8 +39,8 @@ app.get('/user', router.user);
 app.get('/product/:id', router.product);
 app.get('/main', router.index);
 app.post('/upload', router.uploadImg);
-app.get('/login', router.landing);
-app.get('/logout', router.logout);
+//app.get('/login', router.landing);
+app.get('/log_out', router.logout);
 
 
 // connect to python API
@@ -51,6 +51,5 @@ app.get('/allProduct', router.allProduct);
 app.get('/userProduct', router.userProduct);
 
 
-http.createServer(app).listen(app.get('port'), function(){
-  console.log('tresor server now on port ' + app.get('port'));
-});
+http.createServer(app).listen(3000, "127.0.0.1");
+console.log('tresor server now on port ' + app.get('port'));

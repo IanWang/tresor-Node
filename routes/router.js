@@ -8,19 +8,18 @@ var moment = require('moment');
 
 var apiUrl = 'http://localhost:8000';
 var v1 = 'http://localhost:8000/api/v1';
-var logout = 'http://localhost:8000/logout';
+var logout = 'http://tresor.tw/logout/';
 
 /*
 var apiUrl = 'http://pa4373.ribosome.com.tw:8000';
 var v1 = 'http://pa4373.ribosome.com.tw:8000/api/v1';
 var logout = 'http://pa4373.ribosome.com.tw:8000/logout';
-//var landing = apiUrl;
 */
 
 var getUrl = '/product/';
 var userUrl = '/user/';
 var uploadImg = '/imageupload/';
-var landing = '/login';
+var landing = "http://tresor.tw/login/";
 
 var logger = new (winston.Logger)({
 	exitOnError: false,
