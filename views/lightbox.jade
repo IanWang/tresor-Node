@@ -1,16 +1,9 @@
 body
-	script.
-		(function(d, s, id) {
-		var js, fjs = d.getElementsByTagName(s)[0];
-		if (d.getElementById(id)) return;
-		js = d.createElement(s); js.id = id;
-		js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=365913330182067";
-		fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));
-					
 	link(rel='stylesheet', href='/css/popup_window.css')
 	#fb-root
 	.wrapper(style='width: 99.9% !important; overflow-x: hidden;')
+		input#seller-name(type='text', value=item.owner, style='display: none;')
+		input#seller-fb(type='text', value=item.ownerFbId, style='display: none;')
 		.main.clearfix
 			.main-content.panel#panel1
 				.content-header
@@ -25,7 +18,7 @@ body
 							
 				.content-footer
 					#comments
-						.fb-comments(data-href="http://tresor.tw/product/#{item.id}/", data-width="620")
+						.fb-comments(data-href="http://beta.tresor.tw/product/#{item.id}/", data-width="620")
 			.sidebar-content
 				.sb-block.A
 					.owner.clearfix
@@ -87,7 +80,7 @@ body
 								.confirm.tranBtn.btn(style='display:none') 完成
 								.dequeue.tranBtn.btn(style='display:none') 退出排
 								.unconfirm.tranBtn.btn(style='display:none') 取消完成
-							a.sendMsg.btn(data-toggle='modal')
+							a.lightBuyerSendMsg.btn(data-toggle='modal')
 								i.icon-envelope 
 								&nbsp訊息
 							.line

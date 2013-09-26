@@ -32,7 +32,7 @@ block content
 							img(src=pic.thumb, rel=pic.full)
 							
 				.content-footer
-					.fb-comments(data-href="http://tresor.tw/product/#{item.id}", data-width="630")
+					.fb-comments(data-href="http://beta.tresor.tw/product/#{item.id}/", data-width="630")
 			.sidebar-content
 				.sb-block.A
 					.owner.clearfix
@@ -102,7 +102,7 @@ block content
 									.confirm.btn.tranBtn(style='display:none') 完成
 									.dequeue.btn.tranBtn(style='display:none') 退出排
 									.unconfirm.btn.tranBtn(style='display:none') 取消完成
-								a.sendMsg.btn(data-toggle='modal')
+								a.sendMsg.btn(href='#myModal', data-toggle='modal')
 									i.icon-envelope 
 									&nbsp訊息
 								.line

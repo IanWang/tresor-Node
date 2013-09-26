@@ -42,7 +42,6 @@
 		var bId = $(this).parent().attr('data-id');
 		query.sUnconfirm.buyer = bId;
 		Ajax(apiUrl, query.sUnconfirm, function(res){
-			console.log('sUn',res);
 		});
 	});
 
@@ -51,7 +50,6 @@
 		$('.C .tranBtn').hide();
 		$('.C .unconfirm').show();
 		Ajax(apiUrl, query.bConfirm, function(res){
-			console.log('bCon',res);
 			if(res.msg === 'ok') {
 				alert('雙方均送出確認\n交易結束');
 				window.location = '/';
@@ -66,7 +64,6 @@
 		$('.C .dequeue').show();
 		$('.C .confirm').show();
 		Ajax(apiUrl, query.bUnconfirm, function(res){
-			console.log('bUn',res);
 		});
 	});
 
@@ -76,7 +73,6 @@
 		$('.C .confirm').show();
 		Ajax(apiUrl, query.bQueue, function(res){
 			alert('已將您排入商品\n請主動聯絡賣家');
-			console.log('bQue',res);
 		});
 	});
 
@@ -84,11 +80,25 @@
 		$('.C .tranBtn').hide();
 		$('.C .buy').show();
 		Ajax(apiUrl, query.bDequeue, function(res){
-			console.log('bDeq',res);
 		});
 	});
 
-	$('.listBlock .lightSendMsg').click(function(){
+
+	$('.lightBuyerSendMsg').click(function(){
+		var fb = $('#seller-fb').val();
+		var name = $('#seller-name').val();
+		var link = 'https://www.facebook.com/messages/' + fb;
+
+		var r = confirm("您即將與"+name+"對談\n提醒您，多加留意交易細節及人身安全");
+		
+		if (r==true) {
+			window.open(link, '_blank');
+		} else {
+			return;
+		}
+	});
+
+	$('.lightSendMsg').click(function(){
 		var fb = $(this).parent().attr('data-fb');
 		var name = $('.buyerName').html();
 		var link = 'https://www.facebook.com/messages/' + fb;
@@ -100,9 +110,6 @@
 		} else {
 			return;
 		}
-		
-		$('.msgTarget').html(name);
-		$('.modal-footer a').attr('href', link);
 	});
 
 	$('.listBlock .SsendMsg').click(function(){
@@ -114,8 +121,16 @@
 		$('.modal-footer a').attr('href', link);
 	});
 
-	if($('#comments')) {
+	if($('#comments').length > 0) {
+		function changePluginUrl(value) {
+			var newVal = '<fb:comments href="http://beta.tresor.tw/product/' + value + '/" num_posts="20" width="690"></fb:comments>';
+			$('#comments').html(newVal);
+			FB.XFBML.parse($('#comments').get(0),function(){
+				$(".FB_Loader").remove();
+			});
+		}
 		changePluginUrl(id);
+
 	}
 	function Ajax(url, query, cb){
 		$.ajax({
@@ -124,15 +139,6 @@
 			data: query,
 			dataType: "json",
 			success: cb
-		});
-	}
-
-	function changePluginUrl(value) {
-		var newVal = '<fb:comments href="http://tresor.tw/product/' + value + '" num_posts="20" width="690"></fb:comments>';
-		console.log(newVal);
-		$('#comments').html(newVal);
-		FB.XFBML.parse($('#comments').get(0),function(){
-			$(".FB_Loader").remove();
 		});
 	}
 
