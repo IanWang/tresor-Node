@@ -146,13 +146,12 @@ exports.transaction = function(req, res){
 				if(data.message == 'Transaction done.') {
 					logger.info('transaction done!');
 					res.send({msg: 'ok'});
+				} else if(data.error) {
+					logger.error("transaction request failure, path:", path);
+					res.send({msg: 'failure'});
 				} else {
 					logger.info('actions', data);
 					res.send(data);
-				} 
-				if(err) {
-					logger.error("transaction request failure, path:", path);
-					res.send(null);
 				}
 			}
 		);

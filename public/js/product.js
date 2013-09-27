@@ -30,7 +30,9 @@
 			if(res.msg === 'ok') {
 				alert('雙方均送出確認\n交易結束');
 				window.location = '/';
-			} else {	
+			} else if(res.msg === 'failure') {	
+				alert('一次只能向一位買家確認哦！');
+			} else {
 				alert('已確認此筆交易\n等候買家回覆中...');
 			}
 		});
