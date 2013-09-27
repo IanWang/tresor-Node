@@ -141,6 +141,8 @@ exports.transaction = function(req, res){
 			}
 		, function(err, respond, body){
 				var data = JSON.parse(body);
+				console.log('reqPath:', path);
+				console.log('resBody:', body);
 				if(data.message == 'Transaction done.') {
 					logger.info('transaction done!');
 					res.send({msg: 'ok'});
