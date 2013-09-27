@@ -287,10 +287,13 @@ exports.product = function(req, res){
 						}
 					});
 
+					console.log('c', comfirmList);
+					console.log('w', waitList);
+
 					res.render(render, {
 						item: d, 
-						waitList: buyers,
 						confirmList: confirmList,
+						waitList: buyers,
 						line: '現有 '+line+' 人排隊中。'
 					});
 
