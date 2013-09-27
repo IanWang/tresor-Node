@@ -56,6 +56,15 @@
 	margin: 0 auto;
 }
 
+.content-footer #comments {
+	background: #fcfcfc;
+}
+
+.content-footer #comments h3 {
+	margin: 0 auto;
+	padding: 5px 20px;
+}
+
 .content-footer #comments .fb_iframe_widget ,
 .content-footer #comments .fb_iframe_widget span ,
 .content-footer #comments .fb_iframe_widget iframe {
