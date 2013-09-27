@@ -21,14 +21,17 @@
 */
 #cboxOverlay{background:#333;}
 #colorbox{outline:0;}
+
+/*
     #cboxTopLeft{width:25px; height:25px; }
     #cboxTopCenter{height:25px; }
     #cboxTopRight{width:25px; height:25px;}
     #cboxBottomLeft{width:25px; height:25px;} 
     #cboxBottomCenter{height:25px;}
     #cboxBottomRight{width:25px; height:25px; }
-    #cboxMiddleLeft{width:0px;}
-    #cboxMiddleRight{width:0px;} 
+    #cboxMiddleLeft{width:25px;}
+    #cboxMiddleRight{width:25px;} 
+*/
     #cboxContent{overflow:hidden;}
 		.cboxIframe{background:#fff;}
 		#cboxError{padding:50px; border:1px solid #ccc;}
