@@ -52,11 +52,11 @@
 	}
 
 .content-footer #comments{
-	width: 90%;
+	width: 94%;
 	margin: 0 auto;
 }
 
-.content-footer #comments .fb-comment {
+.content-footer #comments .fb_iframe_widget {
 	width: 100% !important;
 }
 
