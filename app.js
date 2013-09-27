@@ -24,7 +24,7 @@ app.configure('development', function(){
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
 	app.use(express.responseTime());
 	app.all('*',function(req, res, next) {
-		console.log('[Dev] Api Call -',req.url);
+		//console.log('[Dev] Api Call -',req.url);
 		next();
 	});
 });
