@@ -270,8 +270,8 @@ exports.product = function(req, res){
 				}
 
 				if(product.wait_list.length > 0) {
-					var buyer = {};
 					product.wait_list.forEach(function(ele){
+					  var buyer = {}; 
 						buyer.id = ele.bidder.id;
 						buyer.name = ele.bidder.facebook_name;
 						buyer.fb = ele.bidder.facebook_id;
