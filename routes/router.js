@@ -129,7 +129,7 @@ exports.transaction = function(req, res){
 		var pUser = '?api_key=' + key + '&username=' + user;
 		var path;
 
-		if(buyerId) {
+		if(req.query.buyer) {
 			path = v1 + getUrl + productId + action + pUser + buyerId;
 		} else {
 			path = v1 + getUrl + productId + action + pUser; 
