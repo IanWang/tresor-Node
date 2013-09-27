@@ -259,8 +259,8 @@ exports.product = function(req, res){
 			if(product.seller.username === req.session.user) {
 
 				if(product.confirm_list.length > 0) {
-					var confirm = {};
 					product.confirm_list.forEach(function(ele){
+						var confirm = {};
 						if(ele.seller_confirm) {
 							confirm.id = ele.bidder.id;
 							confirm.name = ele.bidder.facebook_name;
