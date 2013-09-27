@@ -14,6 +14,13 @@
 	border-right: 1px solid #e2e2e2;
 	margin-bottom: 50px;
 }
+
+.light-main {
+	width: 100%;
+	background-color: #f6f6f6;
+	border: 1px solid #e2e2e2;
+}
+
 .main-content {
 	width: 69.5%;
 	float: left;
@@ -51,13 +58,13 @@
 		margin: auto auto;
 	}
 
+.content-footer{
+	background: #fcfcfc;
+}
+
 .content-footer #comments{
 	width: 94%;
 	margin: 0 auto;
-}
-
-.content-footer #comments {
-	background: #fcfcfc;
 }
 
 .content-footer #comments h3 {
