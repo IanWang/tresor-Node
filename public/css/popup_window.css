@@ -51,7 +51,9 @@
 		margin: auto auto;
 	}
 
-.content-footer {
+.content-footer #comments{
+	width: 90%;
+	margin: 0 auto;
 }
 
 

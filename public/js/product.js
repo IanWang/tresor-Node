@@ -127,7 +127,7 @@
 
 	if($('#comments').length > 0) {
 		function changePluginUrl(value) {
-			var newVal = '<fb:comments href="http://beta.tresor.tw/product/' + value + '/" num_posts="20" width="690"></fb:comments>';
+			var newVal = '<fb:comments href="http://beta.tresor.tw/product/' + value + '/" num_posts="20" width="100%"></fb:comments>';
 			$('#comments').html(newVal);
 			FB.XFBML.parse($('#comments').get(0),function(){
 				$(".FB_Loader").remove();
