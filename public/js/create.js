@@ -84,6 +84,8 @@ $(function() {
 
 		if(err == '') {
 
+			var r = confirm("是否確定發佈？\n注意：商品發佈後便無法更改內容");
+
 			var data = JSON.stringify({
 				bought: buy,
 				des: description,
@@ -96,27 +98,32 @@ $(function() {
 			});
 
 			console.log(data);
-			$.ajax({
-				url: '/create',
-				type: 'POST',
-				contentType: 'application/json',
-				data: data,
-				dataType: 'json',
-				success: function(data){
-					if(data.status && data.id) {
-						objId = data.id;
-						console.log(data);
-						console.log(objId);
-						myDropzone.processQueue();
-						alert('新增成功');
-						window.location = '/';
+			
+			if(r == true) {
+				$.ajax({
+					url: '/create',
+					type: 'POST',
+					contentType: 'application/json',
+					data: data,
+					dataType: 'json',
+					success: function(data){
+						if(data.status && data.id) {
+							objId = data.id;
+							console.log(data);
+							console.log(objId);
+							myDropzone.processQueue();
+							alert('新增成功');
+							window.location = '/';
 
+						}
+					},
+					error: function(res){
+						window.alert('failure');
 					}
-				},
-				error: function(res){
-					window.alert('failure');
-				}
-			});
+				});
+			} else {
+				console.log('發佈取消');
+			}
 		}
 	});
 
@@ -147,6 +154,11 @@ $(document).ready(function(){
 	$("#p-shoes-size").tooltip({
 		html: true,
 		title: '<p style="margin: 4px; font-size: 14px;font-weight: bold">為便於搜尋，請統一使用歐碼</p>',
+		placement: 'right'
+	});
+	$("#p-des").tooltip({
+		html: true,
+		title: '<p style="font-weight:bold; font-size:14px; margin:4px;">此為備註欄</p><p>若是有額外的說明都可在此欄填寫</p>',
 		placement: 'right'
 	});
 });

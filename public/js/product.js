@@ -54,6 +54,7 @@
 				alert('雙方均送出確認\n交易結束');
 				window.location = '/';
 			} else {	
+	console.log(res);
 				alert('已確認此筆交易\n等待賣家回覆中');
 			}
 		});
@@ -64,6 +65,7 @@
 		$('.C .dequeue').show();
 		$('.C .confirm').show();
 		Ajax(apiUrl, query.bUnconfirm, function(res){
+	console.log(res);
 		});
 	});
 
@@ -72,6 +74,7 @@
 		$('.C .dequeue').show();
 		$('.C .confirm').show();
 		Ajax(apiUrl, query.bQueue, function(res){
+	console.log(res);
 			alert('已將您排入商品\n請主動聯絡賣家');
 		});
 	});
@@ -80,6 +83,7 @@
 		$('.C .tranBtn').hide();
 		$('.C .buy').show();
 		Ajax(apiUrl, query.bDequeue, function(res){
+	console.log(res);
 		});
 	});
 

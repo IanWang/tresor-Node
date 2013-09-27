@@ -223,7 +223,7 @@ exports.product = function(req, res){
 			d.description = product.description;
 			d.tranStatus = product.transaction_status;
 			d.owner = product.seller.facebook_name;
-			d.ownerPic = product.seller.image;
+			d.ownerPic = product.seller.image_small;
 			d.ownerFbId = product.seller.facebook_id;
 			product.image.forEach(function(ele, index){
 				d.img.push({
@@ -263,7 +263,7 @@ exports.product = function(req, res){
 							confirm.id = ele.bidder.id;
 							confirm.name = ele.bidder.facebook_name;
 							confirm.fb = ele.bidder.facebook_id;
-							confirm.img = ele.bidder.image
+							confirm.img = ele.bidder.image_small;
 							confirmList.push(confirm);
 						}
 					});
@@ -275,7 +275,7 @@ exports.product = function(req, res){
 						buyer.id = ele.bidder.id;
 						buyer.name = ele.bidder.facebook_name;
 						buyer.fb = ele.bidder.facebook_id;
-						buyer.img = ele.bidder.image;
+						buyer.img = ele.bidder.image_small;
 						if(confirmList.length > 0) {
 							confirmList.forEach(function(e){
 								if(buyer.id !== e.id) {
@@ -323,7 +323,7 @@ exports.product = function(req, res){
 				}
 
 				if(inConfirm) {
-					console.log('inConfirm');
+					console.log('inConfirm', item, line);
 					res.render(render, {
 						item: d, 
 						inConfirm: true,
@@ -331,7 +331,7 @@ exports.product = function(req, res){
 					});
 
 				} else if(inWait) {
-					console.log('inWait');
+					console.log('inWait', item, line);
 					res.render(render, {
 						item: d, 
 						inWait: true,
