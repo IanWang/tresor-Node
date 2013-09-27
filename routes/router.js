@@ -287,9 +287,6 @@ exports.product = function(req, res){
 						}
 					});
 
-					console.log('c', comfirmList);
-					console.log('w', waitList);
-
 					res.render(render, {
 						item: d, 
 						confirmList: confirmList,
@@ -326,7 +323,6 @@ exports.product = function(req, res){
 				}
 
 				if(inConfirm) {
-					console.log('inConfirm', item, line);
 					res.render(render, {
 						item: d, 
 						inConfirm: true,
@@ -334,7 +330,6 @@ exports.product = function(req, res){
 					});
 
 				} else if(inWait) {
-					console.log('inWait', item, line);
 					res.render(render, {
 						item: d, 
 						inWait: true,

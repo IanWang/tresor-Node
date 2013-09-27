@@ -28,7 +28,12 @@ body
 						#userInfo
 							#userName=item.owner
 				.panel#panel2
-					if msg
+					if closed
+						.sb-block.D
+							.DHead
+								p 此項商品已結束交易！
+								a(href='/') 回到主頁
+					else if msg
 						.sb-block.D
 							.DHead
 								p=msg
