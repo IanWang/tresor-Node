@@ -56,7 +56,7 @@
 	margin: 0 auto;
 }
 
-.content-footer #comments .fb_iframe_widget {
+.content-footer #comments .fb_iframe_widget iframe {
 	width: 100% !important;
 }
 
