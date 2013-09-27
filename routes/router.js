@@ -314,7 +314,9 @@ exports.product = function(req, res){
 					product.confirm_list.some(function(e){
 						if(e.bidder_confirm) {
 							inConfirm = (me === e.bidder.username) ? true : false;
-							return true;
+							if(inConfirm) {
+								return true;
+							}
 						}
 					});
 				}
@@ -322,7 +324,9 @@ exports.product = function(req, res){
 				if(product.wait_list.length > 0) {
 					product.wait_list.some(function(e){
 						inWait = (me === e.bidder.username) ? true : false;
-						return true;
+						if(inWait) {
+							return true;
+						}
 					});
 				}
 
