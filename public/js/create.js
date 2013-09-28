@@ -14,7 +14,7 @@ Dropzone.options.myDropzone = {
 	maxFilesize: 4, // MB
 	addRemoveLinks: true,
 	dictRemoveFile: 'remove',
-	dictFileTooBig: '檔案過大',
+	dictFileTooBig: '檔案上限4MB',
 	parallelUploads: 10,
 	autoProcessQueue: false,
 	acceptedFiles: 'image/*'
@@ -46,7 +46,7 @@ $(function() {
 	
 	$('#submit').click(function(){
 	
-		var file = myDropzone.files.getAcceptedFiles();
+		var file = $('.dz-preview');
 		var name = $('#p-name').val();
 		var gender = $('#p-gender').val();
 		var type = $('#p-type').val();
@@ -63,6 +63,9 @@ $(function() {
 		var sell = parseInt($('#p-sold').val(), 10);
 		var err = '';
 
+		var accept = myDropzone.getAcceptedFiles();
+
+		console.log('accept',accept);
 		console.log(file);
 		console.log(file.length);
 		if(file.length == 0){
@@ -100,8 +103,6 @@ $(function() {
 				type: type
 			});
 
-			console.log(data);
-			
 			if(r == true) {
 				$.ajax({
 					url: '/create',
