@@ -14,6 +14,7 @@ Dropzone.options.myDropzone = {
 	maxFilesize: 4, // MB
 	addRemoveLinks: true,
 	dictRemoveFile: 'remove',
+	dictFileTooBig: '檔案過大',
 	parallelUploads: 10,
 	autoProcessQueue: false,
 	acceptedFiles: 'image/*'
@@ -45,7 +46,7 @@ $(function() {
 	
 	$('#submit').click(function(){
 	
-		var file = $('.dz-preview');
+		var file = myDropzone.files.getAcceptedFiles();
 		var name = $('#p-name').val();
 		var gender = $('#p-gender').val();
 		var type = $('#p-type').val();
@@ -62,6 +63,8 @@ $(function() {
 		var sell = parseInt($('#p-sold').val(), 10);
 		var err = '';
 
+		console.log(file);
+		console.log(file.length);
 		if(file.length == 0){
 			err += '至少需上傳一張圖片哦\n';
 		}
