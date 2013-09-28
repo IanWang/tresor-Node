@@ -392,6 +392,7 @@ exports.createNew = function(req, res){
 					
 					var objID = response.headers.location.split('/');
 					var productID = objID[objID.length-2];
+					console.log('createBody:',form);
 					
 					res.send({
 						status: 'ok',
