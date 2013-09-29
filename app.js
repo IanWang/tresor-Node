@@ -25,7 +25,22 @@ app.configure('development', function(){
 	app.use(express.responseTime());
 	app.all('*',function(req, res, next) {
 		//console.log('[Dev] Api Call -',req.url);
-		next();
+		
+		if(req.session.user && req.session.key) {
+			var isAuth = true;
+		} else {
+			var isAuth = false;
+		}
+
+		if(isAuth || req.path === '/faq'){
+			console.log('a1',isAuth);
+			next();
+		} else {
+			var landing = "https://beta.tresor.tw/login/";
+			console.log('a2',isAuth);
+			res.rediect(landing);
+		}
+
 	});
 });
 

@@ -170,7 +170,6 @@ exports.create = function(req, res){
 };
 
 exports.user = function(req, res){
-	if(req.session.user && req.session.key) {
 		var key = req.session.key;
 		var user = req.session.user;
 		var pUser = '?api_key=' + key + '&username=' + user +'&seller_username=' + user;
@@ -185,9 +184,6 @@ exports.user = function(req, res){
 			res.render('user', {user: info});
 		});
 
-	} else {
-		res.redirect(landing);
-	}
 };
 
 exports.product = function(req, res){
