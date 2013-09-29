@@ -32,7 +32,7 @@ $('#my-history').hide();
 
 getProduct(query.owned, '#my-history');
 getProduct(query.sell, '#my-item');
-getProduct(query.follw, '#my-follow');
+getProduct(query.follow, '#my-follow');
 
 
 function getProduct(q, whereToAppend) {
