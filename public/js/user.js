@@ -107,7 +107,7 @@ function filter() {
 		} else if (value === 'on') {
 			all.hide();
 			on.show();
-		} else (value === 'closed') {
+		} else if (value === 'closed') {
 			all.hide();
 			closed.show();
 		}
