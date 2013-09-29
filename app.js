@@ -26,19 +26,21 @@ app.configure('development', function(){
 	app.all('*',function(req, res, next) {
 		//console.log('[Dev] Api Call -',req.url);
 		
+		var landing = "https://beta.tresor.tw/login/";
+		var faq = "https://beta.tresor.tw/faq/";
+
 		if(req.session.user && req.session.key) {
 			var isAuth = true;
 		} else {
 			var isAuth = false;
 		}
 
-		if(isAuth || req.path === '/faq'){
+		if(isAuth || req.path === faq || req.path === '/token_register'){
 			console.log('a1',isAuth);
 			next();
 		} else {
-			var landing = "https://beta.tresor.tw/login/";
 			console.log('a2',isAuth);
-			res.rediect(landing);
+			res.redirect(landing);
 		}
 
 	});
