@@ -6,6 +6,7 @@ var render_from_tpl = doT.template('<div class="item"><a href="#inline_content" 
 
 query.sell = {type: '&seller_username='};
 query.owned = {type: '&buyer_username='};
+query.follow = {type: '&bidder_username='};
 
 $('#a').click(function(){
 	$('#my-follow').hide();
@@ -31,6 +32,7 @@ $('#my-history').hide();
 
 getProduct(query.owned, '#my-history');
 getProduct(query.sell, '#my-item');
+getProduct(query.sell, '#my-follow');
 
 
 function getProduct(q, whereToAppend) {
