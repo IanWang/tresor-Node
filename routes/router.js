@@ -91,6 +91,7 @@ exports.userProduct = function(req, res){
 			item.title = ele.title;
 			item.date = moment(ele.date_added).format('lll');
 			item.id = ele.id;
+			item.status = ele.transaction_status;
 			item.waiting = ele.wait_list.length || '0';
 			items.push(item);
 		});

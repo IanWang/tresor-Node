@@ -2,7 +2,7 @@
 
 var apiUrl = '/userProduct';
 var query = {};
-var render_from_tpl = doT.template('<div class="item"><a href="#inline_content" data-id="{{=it.id}}" class="ajax-href"><img class="imgFade" src="{{=it.img_path}}"></a><div class="myproduct-info"><div class="mer_title"><span>{{=it.name}}</span></div><div class="mer_date"><span>{{=it.date}}</span></div><div class="mer_count"><span>{{=it.count}}</span></div></div></div>');
+var render_from_tpl = doT.template('<div class="item tran-{{=it.status}}"><a href="#inline_content" data-id="{{=it.id}}" class="ajax-href"><img class="imgFade" src="{{=it.img_path}}"></a><div class="myproduct-info"><div class="mer_title"><span>{{=it.name}}</span></div><div class="mer_date"><span>{{=it.date}}</span></div><div class="mer_count"><span>{{=it.count}}</span></div></div></div>');
 
 query.sell = {type: '&seller_username='};
 query.owned = {type: '&buyer_username='};
@@ -46,6 +46,7 @@ function getProduct(q, whereToAppend) {
 				data.forEach(function(ele) {
 					var obj = {
 						'img_path': ele.img,
+						'status': ele.status,
 						'name': ele.title,
 						'date': ele.date,
 						'count': ele.waiting,
@@ -54,6 +55,7 @@ function getProduct(q, whereToAppend) {
 					$(whereToAppend).append(render_from_tpl(obj));
 				});
 				initLightBox();
+				filter();
 			},
 			error: function(er) {
 				console.log(er);
@@ -93,7 +95,24 @@ function initLightBox(){
 	});
 }
 
-
+function filter() {
+	$('#filter .dropdown-menu li').click(function(){
+		var value = $(this).find('a').attr('data-value');
+		var all = $('.item');
+		var on = $('.tran-on');
+		var closed = $('.tran-closed');
+		
+		if(value === 'all') {
+			all.show();
+		} else if (value === 'on') {
+			all.hide();
+			on.show();
+		} else (value === 'closed') {
+			all.hide();
+			closed.show();
+		}
+	});
+}
 
 
 /*
