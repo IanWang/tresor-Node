@@ -36,10 +36,8 @@ app.configure('development', function(){
 		}
 
 		if(isAuth || req.path === faq || req.path === '/token_register'){
-			console.log('a1',isAuth);
 			next();
 		} else {
-			console.log('a2',isAuth);
 			res.redirect(landing);
 		}
 
