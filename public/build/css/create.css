@@ -1,0 +1,73 @@
+#product-form-wrapper {
+	width: 80%;
+	max-width: 1300px;
+	margin: 0 auto;
+	padding: 20px 0 50px;
+	margin-bottom: 120px;
+	border-top: 4px solid #bbb;
+	background-color: rgba(255, 255, 255, 0.4); 
+	color: rgba(255, 255, 255, 0.4);
+}
+
+#product-form-wrapper input,
+#product-form-wrapper select,
+#product-form-wrapper textarea {
+	display: block;
+	margin: 17px 0px 17px 35%;
+	height: 30px;
+	width: 50%;
+}
+
+#creation-form {
+	width: 45%;
+}
+	
+#my-dropzone {
+	width: 50%;
+	height: 365px;
+	overflow-x: auto;
+}
+
+#form-header {
+	text-align: center;
+	padding: 5px;
+	text-shadow: 0px 0px 1px #000;
+	color: #fff;
+	font-family: "Helvetica Neue", Helvetica, Arial, "Microsoft Jhenghei", sans-serif;
+}
+#submit {
+	margin-left: 3%;
+	width: 40%;
+	height: 50px;
+}
+#product-form-wrapper form {
+	float: left;
+}
+
+@media only screen and (max-width:480px){
+#creation-form {
+	width: 90%;
+}
+#product-form-wrapper input,
+#product-form-wrapper select,
+#product-form-wrapper textarea {
+	display: block;
+	margin: 14px auto;
+	height: 30px;
+	width: 90%;
+}
+#product-form-wrapper form {
+	width: 100%;
+	float: none;
+}
+	
+#my-dropzone {
+	width: 90%;
+}
+#submit {
+	margin: 10px;
+	width: 90%;
+	height: 50px;
+}
+
+}
