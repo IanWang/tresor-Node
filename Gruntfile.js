@@ -14,13 +14,18 @@ module.exports = function(grunt) {
 			},
 			main: {
 				files: [{
-					src: 'public/js/*.js',
-					dest: "public/build/main.min.js"
-					}, {
-					src: 'public/js/lib/*.js',
-					dest: "public/build/lib.min.js"
-					}
-				]
+					src: 'public/js/create.js',
+					dest: "public/build/create.js"
+				}, {
+					src: 'public/js/product.js',
+					dest: "public/build/product.js"
+				}, {
+					src: 'public/js/window.js',
+					dest: "public/build/window.js"
+				}, {
+					src: 'public/js/user.js',
+					dest: "public/build/user.js"
+				}]
 			}
 		},
 
