@@ -71,6 +71,9 @@ $(function() {
 		}
 		if(!status) {
 			err += '商品狀態為必填\n';
+		} 
+		if(status.length > 15) {
+			err += '商品狀態超過字數上限\n';
 		}
 		if(sell) {
 			if(!isMoney(sell))
@@ -142,7 +145,7 @@ $(document).ready(function(){
 	});
 	$("#p-status").tooltip({
 		html: true,
-		title: '<p style="font-weight:bold; font-size:14px; margin:4px;">此欄為必填</p>',
+		title: '<p style="font-weight:bold; font-size:14px; margin:4px;">此欄為必填，限15字</p>',
 		placement: 'right'
 	});
 	$("#p-sold").tooltip({

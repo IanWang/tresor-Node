@@ -38,7 +38,7 @@ block content
 						input#p-shoes-size(type='text', placeholder='鞋類尺寸')
 						a.sizeChart(href='img/size-chart.jpg', title='鞋碼轉換表', style='margin-left: 35%;') 鞋碼換算表
 					input#p-status(type='text', placeholder='商品狀態')
-					textarea#p-des(cols='40', rows='3')
+					textarea#p-des(cols='40', rows='5', placeholder='商品描述或補充說明')
 					input#p-bought(type='text', pattern='\d*', placeholder='買入價格')
 					input#p-sold(type='text', pattern='\d*', placeholder='欲售價格')
 				form.dropzone#my-dropzone(action='/upload',method='post')

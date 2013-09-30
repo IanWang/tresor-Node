@@ -370,7 +370,7 @@ exports.createNew = function(req, res){
 				});
 			
 			} else {
-				logger.error("create post failure, data:", form);
+				logger.error("create post failure, data:", response, form);
 				res.send(null);
 			}
 		}
