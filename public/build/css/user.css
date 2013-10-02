@@ -20,16 +20,16 @@
 	width: 176px;
 	height: 200px;
 	float: left;
-    overflow: hidden;
-    position:relative;
-    line-height: 0;
-    display: block;
-    opacity: 0.9;
-    margin: 14px 7px 0 7px;
-    -webkit-border-radius: 2px;
-    -moz-border-radius: 2px;
-    border-radius: 2px;
-    -webkit-box-shadow: 0px 2px 4px rgba(0,0,0,0.3);
+	overflow: hidden;
+	position:relative;
+	line-height: 0;
+	display: block;
+	opacity: 0.9;
+	margin: 14px 7px 0 7px;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	-webkit-box-shadow: 0px 2px 4px rgba(0,0,0,0.3);
 	box-shadow: 0px 2px 4px rgba(0,0,0,0.3);
 }
 .product-image {
@@ -90,10 +90,6 @@
 	font-size: 23px;
 }
 #connect_button{
-    margin:0px;
-    padding:0px;
-}
-#my-follow{
     margin:0px;
     padding:0px;
 }

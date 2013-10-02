@@ -15,21 +15,21 @@ module.exports = function(grunt) {
 			main: {
 				files: [{
 					src: 'public/js/create.js',
-					dest: "public/build/create.js"
+					dest: "public/build/js/create.js"
 				}, {
 					src: 'public/js/product.js',
-					dest: "public/build/product.js"
+					dest: "public/build/js/product.js"
 				}, {
 					src: 'public/js/window.js',
-					dest: "public/build/window.js"
+					dest: "public/build/js/window.js"
 				}, {
 					src: 'public/js/user.js',
-					dest: "public/build/user.js"
+					dest: "public/build/js/user.js"
 				}]
 			}
 		},
 
-		clean: ["public/build/"],
+		clean: ["public/build/js/*.js"],
 
 		watch: {
 			files: [
