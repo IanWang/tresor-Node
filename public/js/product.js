@@ -127,6 +127,10 @@
 		$('.modal-footer a').attr('href', link);
 	});
 
+	$('#myModal .modal-footer a button').click(function(){
+		$('#myModal').modal('toggle');	
+	});
+
 	if($('#comments').length > 0) {
 		function changePluginUrl(value) {
 			var newVal = '<fb:comments href="http://beta.tresor.tw/product/' + value + '/" num_posts="20" width="100%"></fb:comments>';
