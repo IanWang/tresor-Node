@@ -29,7 +29,30 @@ module.exports = function(grunt) {
 			}
 		},
 
-		clean: ["public/build/js/*.js"],
+		cssmin: {
+			add_banner: {
+				options: {
+					banner: '<%= uglify.options.banner %>'
+				},
+				files: [{
+					src: 'public/css/popup_window.css',
+					dest: "public/build/css/popup_window.css"
+				}, {
+					src: 'public/css/user.css',
+					dest: "public/build/css/user.css"
+				}, { 
+					src: 'public/css/window.css',
+					dest: "public/build/css/window.css"
+				}]
+		 	}
+		},
+
+		clean: [
+			"public/build/js/*.js",
+			"public/build/css/popup_window.css",
+			"public/build/css/user.css",
+			"public/build/css/window.css",
+		],
 
 		watch: {
 			files: [
@@ -45,10 +68,11 @@ module.exports = function(grunt) {
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
-	grunt.registerTask('default', ['clean', 'uglify']);
+	grunt.registerTask('default', ['clean', 'uglify', 'cssmin']);
 
 };
 

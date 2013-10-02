@@ -88,19 +88,22 @@ function initLightBox(){
 		inline: true, 
 		fixed: true,
 		width: '80%',
-		height: '98%',
+		height: '95%',
 		onCleanup: function(){
-			history.pushState('/', '', '/');
+			history.pushState('/user', '', '/user');
 		}
 	});
 }
 
 function filter() {
-	$('#filter .dropdown-menu li').click(function(){
-		var value = $(this).find('a').attr('data-value');
+	$('#filter-group a').click(function(){
+		var value = $(this).attr('data-value');
 		var all = $('.item');
 		var on = $('.tran-on');
 		var closed = $('.tran-closed');
+		
+		$('#filter-group').removeClass('inUsed');
+		$(this).addClass('inUsed');
 		
 		if(value === 'all') {
 			all.show();
@@ -113,47 +116,3 @@ function filter() {
 		}
 	});
 }
-
-
-/*
-$.ajax({
-	url : apiUrl + '/api/product/user/'+uID+'/',
-	type : 'GET',
-	contentType : 'application/json',
-	dataType : 'json',
-	success : function(data) {
-		$('#avatar').html('<img src='+data.profile_picture+'>');
-		$('#avatar_name span').text(data.first_name+' '+data.last_name);
-	}
-});
-
-$.ajax({
-    url : apiUrl,
-    type : 'GET',
-    contentType : 'application/json',
-    dataType : 'json',
-    success : function(data) {
-		data.objects.forEach(function(element, index, array) {
-			var selector;
-			if (element.transaction_set[0].product.onsale){
-				selector = $('#merchandise_image_store2');
-			}
-			else{
-				if(element.transaction_set[0].buyer != null){
-					if(element.transaction_set[0].buyer.id = uID){
-						selector = $('#merchandise_image_store3');
-					}
-				}
-			}
-			var obj = {
-				'img_path': element.transaction_set[0].product.images[0].w236_path,
-				2'name': element.transaction_set[0].product.name,
-				'date': new Date(element.transaction_set[0].product.publishedDate).toLocaleString(),
-				'count': element.transaction_set[0].matchingEntry.length,
-				'url': '/product/'+element.transaction_set[0].product.id+'/',
-			};
-			selector.append(render_from_tpl(obj));
-		});
-	}
-});
-*/

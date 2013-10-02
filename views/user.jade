@@ -18,17 +18,10 @@ block content
 							a#b(href='#my-follow', data-toggle='tab') 追蹤商品
 						li
 							a#c(href='#my-history', data-toggle='tab') 交易完成
-					.btn-group#filter
-						a.btn.dropdown-toggle(data-toggle='dropdown', href='#') 
-							商品狀態&nbsp
-							span.caret
-						ul.dropdown-menu.pull-right
-							li
-								a(data-value='all') 全部
-							li
-								a(data-value='on') 拍賣中
-							li
-								a(data-value='closed') 結束
+					#filter-group
+						a.inUsed(data-value='all') 全部
+						a(data-value='on') 拍賣中
+						a(data-value='closed') 結束
 					.my-box.clearfix
 						div(style='display:none;')
 							#inline_content

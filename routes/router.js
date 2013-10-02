@@ -31,7 +31,7 @@ var logger = new (winston.Logger)({
 });
 
 exports.index = function(req, res){
-	console.log('user in:', req.session.user);
+	logger.info('user in:', req.session.user);
 	res.render('main');
 };
 
@@ -129,13 +129,11 @@ exports.transaction = function(req, res){
 			console.log('reqPath:', path);
 			console.log('resBody:', body);
 			if(data.message == 'Transaction done.') {
-				logger.info('transaction done!');
 				res.send({msg: 'ok'});
 			} else if(data.error) {
 				logger.error("transaction request failure, path:", path);
 				res.send({msg: 'failure'});
 			} else {
-				logger.info('actions', data);
 				res.send(data);
 			}
 		}
@@ -370,7 +368,7 @@ exports.createNew = function(req, res){
 				});
 			
 			} else {
-				logger.error("create post failure, data:", response, form);
+				logger.error("create failure :", response);
 				res.send(null);
 			}
 		}
