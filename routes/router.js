@@ -31,6 +31,7 @@ var logger = new (winston.Logger)({
 });
 
 exports.index = function(req, res){
+	console.log('user in:', req.session.user);
 	logger.info('user in:', req.session.user);
 	res.render('main');
 };
