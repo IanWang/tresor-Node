@@ -102,7 +102,7 @@ function filter() {
 		var on = $('.tran-on');
 		var closed = $('.tran-closed');
 		
-		$('#filter-group').removeClass('inUsed');
+		$('#filter-group a').removeClass('inUsed');
 		$(this).addClass('inUsed');
 		
 		if(value === 'all') {

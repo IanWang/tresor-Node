@@ -112,11 +112,12 @@ li a:hover{
 	-webkit-animation: fadein 0.6s;
 }
 #filter-group {
-	float: left;
+	text-align: left;
 	padding: 8px 3px;
 }
 #filter-group a {
-	margin: 3px;
+	margin: 8px;
+	cursor: pointer;
 }
 .inUsed {
 	font-weight: bold;
