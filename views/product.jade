@@ -43,71 +43,77 @@ block content
 						#userInfo
 							#userName=item.owner
 				.panel#panel2
-					if closed
+					if notLogin
 						.sb-block.D
 							.DHead
 								p 此項商品已結束交易！
 								a(href='/') 回到主頁
-					else if msg
-						.sb-block.D
-							.DHead
-					else if waitList	
-						.sb-block.D
-							.DHead
-								p=line
-							.listBlock.clearfix
-								ul
-									if confirmList
-										each confirm in confirmList
-											li(id='wlist-#{confirm.id}')
-												img(src=confirm.img)
-												span.buyerName=confirm.name
-												.btnGroup(data-id=confirm.id, data-fb=confirm.fb)
+					else
+						if closed
+							.sb-block.D
+								.DHead
+									p 此項商品已結束交易！
+									a(href='/') 回到主頁
+						else if msg
+							.sb-block.D
+								.DHead
+						else if waitList	
+							.sb-block.D
+								.DHead
+									p=line
+								.listBlock.clearfix
+									ul
+										if confirmList
+											each confirm in confirmList
+												li(id='wlist-#{confirm.id}')
+													img(src=confirm.img)
+													span.buyerName=confirm.name
+													.btnGroup(data-id=confirm.id, data-fb=confirm.fb)
+														a.SsendMsg.FromSeller.btn(href='#myModal', role='button', data-toggle='modal')
+															i.icon-envelope
+														.sUncon.btn.btn-primary 取消
+														.sCon.btn.btn-primary(style='display:none') 完成
+										each buyer in waitList
+											li(id='wlist-#{buyer.id}')
+												img(src=buyer.img)
+												span.buyerName=buyer.name
+												.btnGroup(data-id=buyer.id, data-fb=buyer.fb)
 													a.SsendMsg.FromSeller.btn(href='#myModal', role='button', data-toggle='modal')
 														i.icon-envelope
-													.sUncon.btn.btn-primary 取消
-													.sCon.btn.btn-primary(style='display:none') 完成
-									each buyer in waitList
-										li(id='wlist-#{buyer.id}')
-											img(src=buyer.img)
-											span.buyerName=buyer.name
-											.btnGroup(data-id=buyer.id, data-fb=buyer.fb)
-												a.SsendMsg.FromSeller.btn(href='#myModal', role='button', data-toggle='modal')
-													i.icon-envelope
-												.sCon.btn.btn-primary 完成
-												.sUncon.btn.btn-primary(style='display: none') 取消
-					else
-						.sb-block.C
-							if inConfirm
-								.unconfirm.btn.tranBtn 取消完成
-								.buy.btn.btn-danger.tranBtn(style='display:none')
-									i.icon-plus-sign.icon-white 
-									&nbsp加入排
-								.confirm.tranBtn.btn(style='display:none') 完成
-								.dequeue.tranBtn.btn(style='display:none') 退出排
-							else if inWait
-								.confirm.btn.tranBtn 完成
-								.dequeue.btn.tranBtn 退出排
-								.buy.btn.btn-danger.tranBtn(style='display:none')
-									i.icon-plus-sign.icon-white 
-									&nbsp加入排
-								.unconfirm.btn.tranBtn(style='display:none') 取消完成
-							else
-								.buy.btn.btn-danger.tranBtn
-									i.icon-plus-sign.icon-white 
-									&nbsp加入排
-								.confirm.btn.tranBtn(style='display:none') 完成
-								.dequeue.btn.tranBtn(style='display:none') 退出排
-								.unconfirm.btn.tranBtn(style='display:none') 取消完成
-							a.sendMsg.btn(href='#myModal', data-toggle='modal')
-								i.icon-envelope 
-								&nbsp訊息
-							.line
-								if line
-									p
-										| 現有
-										strong= line
-										|  人排隊中。
+													.sCon.btn.btn-primary 完成
+													.sUncon.btn.btn-primary(style='display: none') 取消
+						else
+							.sb-block.C
+								if inConfirm
+									.unconfirm.btn.tranBtn 取消完成
+									.buy.btn.btn-danger.tranBtn(style='display:none')
+										i.icon-plus-sign.icon-white 
+										&nbsp加入排
+									.confirm.tranBtn.btn(style='display:none') 完成
+									.dequeue.tranBtn.btn(style='display:none') 退出排
+								else if inWait
+									.confirm.btn.tranBtn 完成
+									.dequeue.btn.tranBtn 退出排
+									.buy.btn.btn-danger.tranBtn(style='display:none')
+										i.icon-plus-sign.icon-white 
+										&nbsp加入排
+									.unconfirm.btn.tranBtn(style='display:none') 取消完成
+								else
+									.buy.btn.btn-danger.tranBtn
+										i.icon-plus-sign.icon-white 
+										&nbsp加入排
+									.confirm.btn.tranBtn(style='display:none') 完成
+									.dequeue.btn.tranBtn(style='display:none') 退出排
+									.unconfirm.btn.tranBtn(style='display:none') 取消完成
+								a.sendMsg.btn(href='#myModal', data-toggle='modal')
+									i.icon-envelope 
+									&nbsp訊息
+								.line
+									if line
+										p
+											| 現有
+											strong= line
+											|  人排隊中。
 					.sb-block.B
 						.product-info
 							ul

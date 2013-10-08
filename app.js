@@ -35,7 +35,7 @@ app.configure('development', function(){
 			var isAuth = false;
 		}
 
-		if(isAuth || req.path === faq || req.path === '/token_register'){
+		if(isAuth || req.path === faq || req.path === '/token_register' || req.path === '/product/:id'){
 			next();
 		} else {
 			res.redirect(landing);

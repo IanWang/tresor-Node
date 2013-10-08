@@ -220,110 +220,119 @@ exports.product = function(req, res){
 			d.date = moment(product.date_added, "YYYY-MM-DDTHH:mm:ss").fromNow();
 		}
 
-		if(d.tranStatus === 'closed') {
-			res.render(render, {
+		// if user isn't Authenticated
+		if(!req.session.user || !req.session.key) {
+			res.render('product', {
 				item: d,
-				closed: true
+				notLogin: true
 			});
-		}
-
-		// if the user is seller
-		if(product.seller.username === req.session.user) {
-
-			if(product.confirm_list.length > 0) {
-				product.confirm_list.forEach(function(ele){
-					var confirm = {};
-					if(ele.seller_confirm) {
-						confirm.id = ele.bidder.id;
-						confirm.name = ele.bidder.facebook_name;
-						confirm.fb = ele.bidder.facebook_id;
-						confirm.img = ele.bidder.image_small;
-						confirmList.push(confirm);
-					}
-				});
-			}
-
-			if(product.wait_list.length > 0) {
-				product.wait_list.forEach(function(ele){
-					var buyer = {}; 
-					buyer.id = ele.bidder.id;
-					buyer.name = ele.bidder.facebook_name;
-					buyer.fb = ele.bidder.facebook_id;
-					buyer.img = ele.bidder.image_small;
-					if(confirmList.length > 0) {
-						confirmList.forEach(function(e){
-							if(buyer.id !== e.id) {
-								buyers.push(buyer);
-							}
-						});
-					} else {
-						buyers.push(buyer);
-					}
-				});
-
-				res.render(render, {
-					item: d, 
-					confirmList: confirmList,
-					waitList: buyers,
-					line: '現有 '+line+' 人排隊中。'
-				});
-
-			} else {
-				res.render(render, {
-					item: d, 
-					msg: '還沒有人排隊哦！',
-				});
-			}
 
 		} else {
 
-			// if the user is buyer
-			var me = req.session.user;
-			var inConfirm;
-			var inWait;
-
-			if(product.confirm_list.length > 0) {
-				product.confirm_list.some(function(e){
-					if(e.bidder_confirm) {
-						inConfirm = (me === e.bidder.username) ? true : false;
-						if(inConfirm) {
-							return true;
-						}
-					}
-				});
-			}
-
-			if(product.wait_list.length > 0) {
-				product.wait_list.some(function(e){
-					inWait = (me === e.bidder.username) ? true : false;
-					if(inWait) {
-						return true;
-					}
-				});
-			}
-
-			if(inConfirm) {
-				res.render(render, {
-					item: d, 
-					inConfirm: true,
-					line: line
-				});
-
-			} else if(inWait) {
-				res.render(render, {
-					item: d, 
-					inWait: true,
-					line: line
-				});
-
-			} else {
+			if(d.tranStatus === 'closed') {
 				res.render(render, {
 					item: d,
-					line: line
+					closed: true
 				});
 			}
-		}
 
+			// if the user is seller
+			if(product.seller.username === req.session.user) {
+
+				if(product.confirm_list.length > 0) {
+					product.confirm_list.forEach(function(ele){
+						var confirm = {};
+						if(ele.seller_confirm) {
+							confirm.id = ele.bidder.id;
+							confirm.name = ele.bidder.facebook_name;
+							confirm.fb = ele.bidder.facebook_id;
+							confirm.img = ele.bidder.image_small;
+							confirmList.push(confirm);
+						}
+					});
+				}
+
+				if(product.wait_list.length > 0) {
+					product.wait_list.forEach(function(ele){
+						var buyer = {}; 
+						buyer.id = ele.bidder.id;
+						buyer.name = ele.bidder.facebook_name;
+						buyer.fb = ele.bidder.facebook_id;
+						buyer.img = ele.bidder.image_small;
+						if(confirmList.length > 0) {
+							confirmList.forEach(function(e){
+								if(buyer.id !== e.id) {
+									buyers.push(buyer);
+								}
+							});
+						} else {
+							buyers.push(buyer);
+						}
+					});
+
+					res.render(render, {
+						item: d, 
+						confirmList: confirmList,
+						waitList: buyers,
+						line: '現有 '+line+' 人排隊中。'
+					});
+
+				} else {
+					res.render(render, {
+						item: d, 
+						msg: '還沒有人排隊哦！',
+					});
+				}
+
+			} else {
+
+				// if the user is buyer
+				var me = req.session.user;
+				var inConfirm;
+				var inWait;
+
+				if(product.confirm_list.length > 0) {
+					product.confirm_list.some(function(e){
+						if(e.bidder_confirm) {
+							inConfirm = (me === e.bidder.username) ? true : false;
+							if(inConfirm) {
+								return true;
+							}
+						}
+					});
+				}
+
+				if(product.wait_list.length > 0) {
+					product.wait_list.some(function(e){
+						inWait = (me === e.bidder.username) ? true : false;
+						if(inWait) {
+							return true;
+						}
+					});
+				}
+
+				if(inConfirm) {
+					res.render(render, {
+						item: d, 
+						inConfirm: true,
+						line: line
+					});
+
+				} else if(inWait) {
+					res.render(render, {
+						item: d, 
+						inWait: true,
+						line: line
+					});
+
+				} else {
+					res.render(render, {
+						item: d,
+						line: line
+					});
+				}
+			}
+		}
 	});
 
 };
