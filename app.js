@@ -20,6 +20,7 @@ app.configure(function(){
 	//app.use(express.static(path.join(__dirname, 'public')));
 });
 
+app.get('/product/:id', router.product);
 app.configure('development', function(){
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
 	app.use(express.responseTime());
@@ -35,7 +36,7 @@ app.configure('development', function(){
 			var isAuth = false;
 		}
 
-		if(isAuth || req.path === faq || req.path === '/token_register' || req.path === '/product/:id'){
+		if(isAuth || req.path === faq || req.path === '/token_register'){
 			next();
 		} else {
 			res.redirect(landing);
@@ -51,7 +52,6 @@ app.configure('production', function(){
 app.get('/', router.index);
 app.get('/create', router.create);
 app.get('/user', router.user);
-app.get('/product/:id', router.product);
 app.get('/main', router.index);
 app.post('/upload', router.uploadImg);
 //app.get('/login', router.landing);
