@@ -20,7 +20,6 @@ app.configure(function(){
 	//app.use(express.static(path.join(__dirname, 'public')));
 });
 
-app.get('/product/:id', router.product);
 app.configure('development', function(){
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
 	app.use(express.responseTime());
@@ -50,6 +49,7 @@ app.configure('production', function(){
 });
 
 app.get('/', router.index);
+app.get('/product/:id', router.product);
 app.get('/create', router.create);
 app.get('/user', router.user);
 app.get('/main', router.index);
