@@ -458,11 +458,25 @@ exports.delProduct = function(req, res) {
 	var userKey = '?api_key='+ req.session.key;
 	var userName = '&username=' + req.session.user;
 	var path = v1 + getUrl + id + userKey + userName;
-
-  request.del(path, function(err, respond, body) {
-    console.log('delBody:', body);
-    res.send({'msg':'ok'});
+  var isOwner;
+  
+  request.get(path, function(err, respond, body) { 
+		var product = JSON.parse(body);
+    if(req.session.user === product.seller.username) {
+      isOwner = true;
+    } else {
+      isOwner = false;
+    }
   });
+
+  if(isOwner) {
+    request.del(path, function(err, respond, body) {
+      console.log('delBody:', body);
+      res.send({'msg': 'ok'});
+    });
+  } else {
+    res.send({'msg': 'Bad Attempt, You\'re not the owner.'});
+  }
 }
 
 

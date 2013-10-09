@@ -34,7 +34,7 @@ html
             ul.nav.pull-right
               li 
                 a(href='/') 首頁
-              li 
+              li
                 a(href='/user') 記錄
               li 
                 a(href='/create') 新增
@@ -42,8 +42,16 @@ html
                 a(href='/log_out') 登出
     block content
     #footer
+      #feedbackForm
+        form
+          h3 問題回報與建議
+          label(for='fbTitle')
+          input#fbTitle(type='text', required)
+          label(for='fbContent')
+          textarea#fbContent(rows='6', cols='40', required)
+          button.submit 提交
       #suggest
-        a(href="#").feedback feedback
+        a(href="#feedbackForm").feedback Feedback
   block scripts  
   script.
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
