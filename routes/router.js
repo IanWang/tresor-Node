@@ -13,7 +13,7 @@ var Datastore = require('nedb')
 
 var apiUrl = 'http://localhost:8000';
 var v1 = 'http://localhost:8000/api/v1';
-var logout = 'https://beta.tresor.tw/logout/';
+var logout = 'http://beta.tresor.tw/logout/';
 
 /*
 var apiUrl = 'http://pa4373.ribosome.com.tw:8000';
