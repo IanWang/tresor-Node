@@ -21,29 +21,6 @@ html
 				fjs.parentNode.insertBefore(js, fjs);
 				}(document, 'script', 'facebook-jssdk'));
 						
-		style.
-			body {
-				background:url(/img/fbg.png) repeat;
-				padding-top: 60px;
-			}
-			.top-warning {
-				width: 100%;
-				height: 100%;
-				top: 0;
-				position: fixed;
-				background-color: rgba(255,255,241,0.85);
-				z-index: 99999;
-			}
-			.top-warning div{
-				margin: 200px auto;
-				width: 510px;
-			}
-			.top-warning button {
-				margin-top: 10px;
-			}
-			.top-warning a {
-				color: #d9230f;
-			}
 	body
 		.navbar.navbar-fixed-top
 			.navbar-inner
@@ -64,6 +41,8 @@ html
 								a(href='/log_out') 登出
 		block content
 		#footer
+      #suggest
+        a(href="#").feedback feedback
 	block scripts	
 	script.
 		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

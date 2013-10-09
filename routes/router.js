@@ -24,7 +24,7 @@ var logout = 'http://pa4373.ribosome.com.tw:8000/logout';
 var getUrl = '/product/';
 var userUrl = '/user/';
 var uploadImg = '/imageupload/';
-var landing = "https://beta.tresor.tw/login/";
+var landing = "http://beta.tresor.tw/login/";
 
 var logger = new (winston.Logger)({
 	exitOnError: false,
@@ -449,6 +449,19 @@ exports.feedback = function(req, res) {
       console.log('feedback:', req.body);
       res.send({'msg': 'ok'});
     }
+  });
+}
+
+exports.delProduct = function(req, res) {
+	
+  var id = req.params.id + '/';
+	var userKey = '?api_key='+ req.session.key;
+	var userName = '&username=' + req.session.user;
+	var path = v1 + getUrl + id + userKey + userName;
+
+  request.del(path, function(err, respond, body) {
+    console.log('delBody:', body);
+    res.send({'msg':'ok'});
   });
 }
 
