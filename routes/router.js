@@ -5,6 +5,11 @@ var formData = require('form-data');
 var http = require('http');
 var winston = require('winston');
 var moment = require('moment');
+var Datastore = require('nedb')
+  , db = new Datastore({ 
+    filename: 'db/feedback.json', 
+    autoload: true
+  })
 
 var apiUrl = 'http://localhost:8000';
 var v1 = 'http://localhost:8000/api/v1';
@@ -434,6 +439,17 @@ exports.logout = function(req, res){
 
 exports.landing = function(req, res) {
 	res.render('landing');
+}
+
+exports.feedback = function(req, res) {
+  db.insert(req.body, function(err, newDoc){
+    if(err) {
+      res.send({'msg': 'fail'});
+    } else {
+      console.log('feedback:', req.body);
+      res.send({'msg': 'ok'});
+    }
+  });
 }
 
 

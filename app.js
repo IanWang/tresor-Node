@@ -56,6 +56,7 @@ app.get('/main', router.index);
 app.post('/upload', router.uploadImg);
 //app.get('/login', router.landing);
 app.get('/log_out', router.logout);
+app.post('/feedback', router.feedback);
 
 
 // connect to python API
