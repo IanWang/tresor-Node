@@ -72,10 +72,10 @@ body {
   top:1px;
 }
 
-.feedbackForm {
+#feedbackForm {
   display: none;
 }
-.feedbackForm input,
-.feedbackForm textarea {
+#feedbackForm input,
+#feedbackForm textarea {
   margin: 3px;
 }
