@@ -446,6 +446,13 @@ exports.feedback = function(req, res) {
     if(err) {
       res.send({'msg': 'fail'});
     } else {
+
+      db.update({_id: newDoc._id}, {
+        $set: {
+          user: req.session.user
+        }
+      }, {upsert: true});
+
       console.log('feedback:', req.body);
       res.send({'msg': 'ok'});
     }

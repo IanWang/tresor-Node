@@ -118,7 +118,6 @@ $(function() {
       content: c,
       info: who
     }
-    alert(form);
     
     $.ajax({
       type: 'POST',
@@ -128,7 +127,8 @@ $(function() {
       success: function(res) {
         console.log(res);
         if(res.msg === 'ok') {
-          alert('感謝您的寶貴意見\n這讓tresor能夠持續進步:D');
+          alert('感謝您的寶貴意見\n讓tresor能夠持續進步:D');
+          $('feedback').colorbox.close();
         }
       },
       error: function(res) {
