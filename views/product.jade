@@ -1,48 +1,48 @@
 extends layout
 
 block content
-	link(rel='stylesheet', href='/css/popup_window.css')
-	#fb-root
-	#myModal.modal.hide.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
-		.modal-header
-			button.close(type='button', data-dismiss='modal', aria-hidden='true')
-		.modal-body
-			p
-				|您即將和&nbsp;
-				strong.msgTarget=item.owner
-				|&nbsp;對談，
-				|提醒您，
-				strong 多加留意交易細節及人身安全
-		.modal-footer
-			button.btn(data-dismiss='modal', aria-hidden='true') 取消
-			a(href='https://www.facebook.com/messages/' + item.ownerFbId , target='_blank')
-				button.btn.btn-primary 確認
-				
-	.wrapper
-		.main.clearfix
-			.main-content.panel#panel1
-				.content-header
-					h1=item.name
-					p=item.date
-				.content-body
-					.imgContainer
-						img(src=item.img[0].full)
-					.picbar
-						- each pic in item.img
-							img(src=pic.thumb, rel=pic.full)
-							
-				.content-footer
-					h3 留言
-					#comments
-			.sidebar-content
-				.sb-block.A
-					.owner.clearfix
-						#userAvatar 
-							a(href='#')
-								img(src=item.ownerPic)
-						#userInfo
-							#userName=item.owner
-				.panel#panel2
+  link(rel='stylesheet', href='/css/popup_window.css')
+  #fb-root
+  #myModal.modal.hide.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+    .modal-header
+      button.close(type='button', data-dismiss='modal', aria-hidden='true')
+    .modal-body
+      p
+        |您即將和&nbsp;
+        strong.msgTarget=item.owner
+        |&nbsp;對談，
+        |提醒您，
+        strong 多加留意交易細節及人身安全
+    .modal-footer
+      button.btn(data-dismiss='modal', aria-hidden='true') 取消
+      a(href='https://www.facebook.com/messages/' + item.ownerFbId , target='_blank')
+        button.btn.btn-primary 確認
+        
+  .wrapper
+    .main.clearfix
+      .main-content.panel#panel1
+        .content-header
+          h1=item.name
+          p=item.date
+        .content-body
+          .imgContainer
+            img(src=item.img[0].full)
+          .picbar
+            - each pic in item.img
+              img(src=pic.thumb, rel=pic.full)
+              
+        .content-footer
+          h3 留言
+          #comments
+      .sidebar-content
+        .sb-block.A
+          .owner.clearfix
+            #userAvatar 
+              a(href='#')
+                img(src=item.ownerPic)
+            #userInfo
+              #userName=item.owner
+        .panel#panel2
           if closed
             .sb-block.D
               .DHead
@@ -51,7 +51,7 @@ block content
           else if msg
             .sb-block.D
               .DHead
-          else if waitList	
+          else if waitList  
             .sb-block.D
               .DHead
                 p=line
@@ -108,27 +108,27 @@ block content
                     | 現有
                     strong= line
                     |  人排隊中。
-					.sb-block.B
-						.product-info
-							ul
-								li
-									label 價格：
-									span#price= item.soldPrice
-										span   TWD
-									span.bought （原價&nbsp
-										span#bought= item.boughtPrice
-										元）
-								li
-									label 類別：
-									span#category=item.type
-								li
-									label 尺寸：
-									span#size=item.size
-								li
-									label 狀態：
-									span#status=item.status
-								li
-									label 描述：
-									#des=item.description
+          .sb-block.B
+            .product-info
+              ul
+                li
+                  label 價格：
+                  span#price= item.soldPrice
+                    span   TWD
+                  span.bought （原價&nbsp
+                    span#bought= item.boughtPrice
+                    元）
+                li
+                  label 類別：
+                  span#category=item.type
+                li
+                  label 尺寸：
+                  span#size=item.size
+                li
+                  label 狀態：
+                  span#status=item.status
+                li
+                  label 描述：
+                  #des=item.description
 block scripts
-	script(src='/js/product.js', type='text/javascript')
+  script(src='/js/product.js', type='text/javascript')
