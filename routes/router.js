@@ -76,7 +76,6 @@ exports.userProduct = function(req, res){
 
 	var pUser = '?api_key=' + key + '&username=' + user + type + user;
 	var reqPath = v1 + getUrl + pUser;
-	console.log(reqPath);
 
 	if(req.query.page) {
 		reqPath = apiUrl + req.query.page;
@@ -132,8 +131,6 @@ exports.transaction = function(req, res){
 		}
 	, function(err, respond, body){
 			var data = JSON.parse(body);
-			console.log('reqPath:', path);
-			console.log('resBody:', body);
 			if(data.message == 'Transaction done.') {
 				res.send({msg: 'ok'});
 			} else if(data.error) {
@@ -226,13 +223,6 @@ exports.product = function(req, res){
 		}
 
 		// if user isn't Authenticated
-		if(!req.session.user || !req.session.key) {
-			res.render('product', {
-				item: d,
-				notLogin: true
-			});
-
-		} else {
 
 			if(d.tranStatus === 'closed') {
 				res.render(render, {
@@ -336,7 +326,6 @@ exports.product = function(req, res){
 						line: line
 					});
 				}
-			}
 		}
 	});
 
@@ -446,7 +435,6 @@ exports.feedback = function(req, res) {
     if(err) {
       res.send({'msg': 'fail'});
     } else {
-
       db.update({_id: newDoc._id}, {
         $set: {
           user: req.session.user

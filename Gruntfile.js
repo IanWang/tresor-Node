@@ -23,6 +23,9 @@ module.exports = function(grunt) {
 					src: 'public/js/window.js',
 					dest: "public/build/js/window.js"
 				}, {
+					src: 'public/js/feedback.js',
+					dest: "public/build/js/feedback.js"
+				}, {
 					src: 'public/js/user.js',
 					dest: "public/build/js/user.js"
 				}]

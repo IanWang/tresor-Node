@@ -42,7 +42,6 @@ function getProduct(q, whereToAppend) {
 			data: q, 
 			dataType: 'json',
 			success: function(data) {
-				console.log(data);
 				data.forEach(function(ele) {
 					var obj = {
 						'img_path': ele.img,
