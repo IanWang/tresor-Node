@@ -36,6 +36,7 @@ app.configure('development', function(){
 		}
 
 		if(isAuth || req.path === faq || req.path === '/token_register'){
+      res.header('X-Powered-By', 'ASP.NET(just kidding)');
 			next();
 		} else {
 			res.redirect(landing);
