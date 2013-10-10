@@ -3,7 +3,7 @@ $('.feedback').colorbox({
   fixed: true,
   width: '320',
   height: '440',
-  onCleanup: functio2n(){
+  onCleanup: function(){
     history.pushState('/', '', '/');
   }
 });
