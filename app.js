@@ -26,8 +26,8 @@ app.configure('development', function(){
 	app.all('*',function(req, res, next) {
 		//console.log('[Dev] Api Call -',req.url);
 		
-		var landing = "http://beta.tresor.tw/login/";
-		var faq = "http://beta.tresor.tw/faq/";
+		var landing = "http://tresor.tw/login/";
+		var faq = "http://tresor.tw/faq/";
 
 		if(req.session.user && req.session.key) {
 			var isAuth = true;

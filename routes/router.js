@@ -13,7 +13,7 @@ var Datastore = require('nedb')
 
 var apiUrl = 'http://localhost:8000';
 var v1 = 'http://localhost:8000/api/v1';
-var logout = 'http://beta.tresor.tw/logout/';
+var logout = 'http://tresor.tw/logout/';
 
 /*
 var apiUrl = 'http://pa4373.ribosome.com.tw:8000';
@@ -24,7 +24,7 @@ var logout = 'http://pa4373.ribosome.com.tw:8000/logout';
 var getUrl = '/product/';
 var userUrl = '/user/';
 var uploadImg = '/imageupload/';
-var landing = "http://beta.tresor.tw/login/";
+var landing = "http://tresor.tw/login/";
 
 var logger = new (winston.Logger)({
 	exitOnError: false,
