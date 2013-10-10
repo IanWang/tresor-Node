@@ -167,7 +167,11 @@
 	}
 
 	var cType = $('#category').html();
+  var cSize = $('#size').html();
 	var newType = types[cType];
 	$('#category').html(newType);
+  if(cSize === 'F') {
+    $('#size').html('Free Size');
+  }
 	
 
