@@ -103,13 +103,13 @@ $(function() {
     inline: true, 
     fixed: true,
     width: '350',
-    height: '50%',
+    height: '440',
     onCleanup: function(){
       history.pushState('/', '', '/');
     }
   });
 
-  $('#feedbackFrom .submit').click(function(){
+  $('#feedbackForm .submit').click(function(){
     var t = $('#fbTitle').val();
     var c = $('#fbContent').val();
     var who = saysWho();
@@ -121,9 +121,10 @@ $(function() {
     alert(form);
     
     $.ajax({
-      type: 'post',
+      type: 'POST',
       url: '/feedback', 
       data: form,
+			dataType: 'json',
       success: function(res) {
         console.log(res);
         if(res.msg === 'ok') {

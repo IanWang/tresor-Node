@@ -45,12 +45,12 @@ html
       #feedbackForm
         form
           h3 問題回報與建議
-          label(for='fbTitle')
+          label(for='fbTitle') 標題
           input#fbTitle(type='text', required)
-          label(for='fbContent')
+          label(for='fbContent') 內容
           textarea#fbContent(rows='6', cols='40', required)
           hr
-          button.btn.submit 提交
+          .btn.submit 提交
     #suggest
       a(href="#feedbackForm").feedback Feedback
   block scripts  
