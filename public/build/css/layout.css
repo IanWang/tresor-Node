@@ -75,6 +75,10 @@ body {
 #footer {
   display: none;
 }
+#feedbackForm {
+  background: #ececec;
+  padding: 10px;
+}
 #feedbackForm input,
 #feedbackForm textarea {
   margin: 3px;

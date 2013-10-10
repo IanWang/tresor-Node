@@ -102,7 +102,7 @@ $(function() {
   $('.feedback').colorbox({
     inline: true, 
     fixed: true,
-    width: '550',
+    width: '350',
     height: '50%',
     onCleanup: function(){
       history.pushState('/', '', '/');
@@ -118,6 +118,7 @@ $(function() {
       content: c,
       info: who
     }
+    alert(form);
     
     $.ajax({
       type: 'post',
