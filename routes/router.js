@@ -56,7 +56,8 @@ exports.allProduct = function(req, res){
 		} else {
 			reqPath += '&type=' + filter;	
 		}
-	} else(req.query.page) {
+	} 
+  if(req.query.page) {
 		reqPath = apiUrl + req.query.page;
 	}
 
