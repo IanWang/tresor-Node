@@ -50,7 +50,7 @@ app.configure('production', function(){
 });
 
 app.get('/', router.index);
-app.get('/product/:id', router.product);
+app.get('/product/:id/', router.product);
 app.get('/product/:id/delete', router.delProduct);
 app.get('/create', router.create);
 app.get('/user', router.user);

@@ -5,7 +5,7 @@ $(function() {
 	var getProductRunning = false;
 	var getProduct = function(q, callback) {
 		getProductRunning = true;
-		if(!isEnd)
+    if(!isEnd) {
 			return $.ajax({
 				url : '/allProduct',
 				type : 'GET',
@@ -14,6 +14,7 @@ $(function() {
 				dataType : 'json',
 				success : function(data) {
 					q.page = data.meta.next;
+          q.type = '';
 					ajaxCallback(data);
 					if (q.page != null) {
 						return ;
@@ -23,6 +24,7 @@ $(function() {
 					}
 				},
 			});
+    }
 	};
 
 	var WindowItemTpl = doT.template('<div class="item"><a href="#inline_content" data-id="{{=it.id}}" class="ajax-href"><img src="{{=it.image[0].w236.relative_path}}" style="height: {{=it.image[0].w236.height}}px" class="imgFade"></a><div class="info"></a><div class="title"><a href="#">{{=it.title}}</a></div><div class="seller"><a href="#">{{=it.seller.facebook_name}}</a></div><div class="price">${{=it.sold_price}}</div></div></div>');
@@ -41,9 +43,9 @@ $(function() {
 		$(".ajax-href").click(function(e){
 			$('#inline_content').empty();
 			var id = $(this).attr('data-id');
-			var path = '/product/' + id;
+			var path = '/product/' + id + '/';
 			var $content = $('#inline_content');
-			var ajaxUrl = path;
+			var ajaxUrl = path ;
 			history.pushState(path, '', path);
 			$.ajax({
 				url: ajaxUrl,

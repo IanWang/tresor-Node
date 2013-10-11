@@ -56,12 +56,11 @@ exports.allProduct = function(req, res){
 		} else {
 			reqPath += '&type=' + filter;	
 		}
-	}
-
-	if(req.query.page) {
+	} else(req.query.page) {
 		reqPath = apiUrl + req.query.page;
 	}
 
+  console.log('reqPAth', reqPath);
 	request.get(reqPath, function(err, respond, body){
 		res.send(body);
 	});
