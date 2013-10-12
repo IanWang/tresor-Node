@@ -43,6 +43,9 @@ module.exports = function(grunt) {
 				}, {
 					src: 'public/css/user.css',
 					dest: "public/build/css/user.css"
+				}, {
+					src: 'public/css/layout.css',
+					dest: "public/build/css/layout.css"
 				}, { 
 					src: 'public/css/window.css',
 					dest: "public/build/css/window.css"

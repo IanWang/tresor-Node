@@ -71,4 +71,28 @@ body {
   position:relative;
   top:1px;
 }
+#footer {
+  display: none;
+}
+#feedbackForm {
+  background: #ececec;
+  padding: 10px;
+}
+#feedbackForm input,
+#feedbackForm textarea {
+  margin: 3px;
+}
+.item {opacity: 0.9}
+.item:hover {opacity: 1}
+.deleteProduct {
+	display: none;
+	position: absolute;
+	z-index: 9999;
+	top: 10px;
+	right: 10px;
+	padding-top: 4px;
+}
+.item:hover .deleteProduct {
+	display: block;
+}
 

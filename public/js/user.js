@@ -2,7 +2,8 @@
 
 var apiUrl = '/userProduct';
 var query = {};
-var render_from_tpl = doT.template('<div class="item tran-{{=it.status}}"><a href="#inline_content" data-id="{{=it.id}}" class="ajax-href"><img class="imgFade" src="{{=it.img_path}}"></a><div class="myproduct-info"><div class="mer_title"><span>{{=it.name}}</span></div><div class="mer_date"><span>{{=it.date}}</span></div><div class="mer_count"><span>{{=it.count}}</span></div></div></div>');
+var isEnd = false;
+var render_from_tpl = doT.template('<div class="item tran-{{=it.status}}"><a href="#inline_content" data-id="{{=it.id}}" class="ajax-href"><img class="imgFade" title="{{=it.name}}" src="{{=it.img_path}}"></a><div class="myproduct-info"><div class="mer_title"><span>{{=it.name}}</span></div><div class="mer_date"><span>{{=it.date}}</span></div><div class="mer_count"><span>{{=it.count}}</span></div></div></div>');
 
 query.sell = {type: '&seller_username='};
 query.owned = {type: '&buyer_username='};
@@ -34,6 +35,35 @@ getProduct(query.owned, '#my-history');
 getProduct(query.sell, '#my-item');
 getProduct(query.follow, '#my-follow');
 
+function addDeleteBtn() {
+	$('#my-item .item').each(function(){
+		var temp = '<span class="btn deleteProduct" tite="刪除此商品">刪除</span>'
+		$(this).append(temp);
+	});
+	$('.deleteProduct').click(function(){
+		var id = $(this).parent().find('.ajax-href').attr('data-id');
+		var who = $(this).parent().find('.mer_title span').html();
+		var path = '/product/' + id + '/delete';
+		var r = confirm("您確定要永久刪除商品「" + who + "」？\n(提醒：刪除後便無法復原)");
+		if(r == true) {
+			$.ajax({
+				type: 'GET',
+				url: path,
+				success: function(res) {
+					if(res.msg === 'ok') {
+						alert('刪除成功');
+						window.location.reload();
+					} else {
+						alert(res.msg);
+					}
+				},
+				error: function(res) {
+					alert('fail');
+				}
+			});
+		}
+	});
+}
 
 function getProduct(q, whereToAppend) {
 	$.ajax({
@@ -55,6 +85,9 @@ function getProduct(q, whereToAppend) {
 				});
 				initLightBox();
 				filter();
+				if(q.type === query.sell.type) {
+					addDeleteBtn();
+				}
 			},
 			error: function(er) {
 				console.log(er);

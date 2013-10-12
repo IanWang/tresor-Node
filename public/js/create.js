@@ -115,7 +115,7 @@ $(function() {
 							console.log(objId);
 							myDropzone.processQueue();
 							alert('新增成功');
-							window.location = '/';
+							//window.location = '/';
 
 						}
 					},

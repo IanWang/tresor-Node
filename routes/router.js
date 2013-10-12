@@ -12,6 +12,7 @@ var config = require('../config/index'),
     apiUrl = config.apiUrl,
     env    = config.env,
     logger = config.logger,
+		logout = config.logout,
     v1     = apiUrl + '/api/v1';
     
 /*
@@ -53,7 +54,6 @@ exports.allProduct = function(req, res){
 		reqPath = apiUrl + req.query.page;
 	}
 
-  console.log('reqPAth', reqPath);
 	request.get(reqPath, function(err, respond, body){
 		res.send(body);
 	});
