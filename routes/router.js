@@ -27,7 +27,6 @@ var logout = 'http://pa4373.ribosome.com.tw:8000/logout';
 
 var getUrl = '/product/';
 var userUrl = '/user/';
-var uploadImg = '/imageupload/';
 
 exports.index = function(req, res){
 	console.log('user in:', req.session.user);

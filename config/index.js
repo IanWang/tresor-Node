@@ -18,10 +18,7 @@ start application log and error handler
 */
 var winston = require('winston');
 
-if (env == 'development'){
-    var logger = winston;
-}
-else if (env=='production'){
+if (env=='production' || env =='development'){
     var logpath = require('./config.js')[env].logs.path;
 
     var logger = new (winston.Logger)({
