@@ -1,21 +1,24 @@
 
-var request = require('request');
-var fs = require('fs');
-var formData = require('form-data');
-var http = require('http');
-var winston = require('winston');
-var moment = require('moment');
+var request   = require('request');
+var fs        = require('fs');
+var moment    = require('moment');
 var Datastore = require('nedb')
-  , db = new Datastore({ 
+  , db        = new Datastore({
     filename: 'db/feedback.json', 
     autoload: true
   })
 
+var config = require('../config/index'),
+    apiUrl = config.apiUrl,
+    env    = config.env,
+    logger = config.logger,
+    v1     = apiUrl + '/api/v1';
+    
+/*
 var apiUrl = 'http://localhost:8000';
 var v1 = 'http://localhost:8000/api/v1';
 var logout = 'http://tresor.tw/logout/';
 
-/*
 var apiUrl = 'http://pa4373.ribosome.com.tw:8000';
 var v1 = 'http://pa4373.ribosome.com.tw:8000/api/v1';
 var logout = 'http://pa4373.ribosome.com.tw:8000/logout';
@@ -24,16 +27,6 @@ var logout = 'http://pa4373.ribosome.com.tw:8000/logout';
 var getUrl = '/product/';
 var userUrl = '/user/';
 var uploadImg = '/imageupload/';
-var landing = "http://tresor.tw/login/";
-
-var logger = new (winston.Logger)({
-	exitOnError: false,
-	transports: [
-		new (winston.transports.File)({ 
-			filename: '../logs.log' 
-		})
-	]
-});
 
 exports.index = function(req, res){
 	console.log('user in:', req.session.user);
@@ -56,8 +49,7 @@ exports.allProduct = function(req, res){
 		} else {
 			reqPath += '&type=' + filter;	
 		}
-	} 
-  if(req.query.page) {
+	} else if(req.query.page) {
 		reqPath = apiUrl + req.query.page;
 	}
 
@@ -105,44 +97,6 @@ exports.userProduct = function(req, res){
 	});
 
 };
-
-exports.transaction = function(req, res){
-
-	var key  = req.session.key;
-	var user = req.session.user;
-	
-	var action = req.query.action + '/';
-	var productId = req.query.id + '/';
-	var buyerId = '&to=' + req.query.buyer;
-	var method = req.query.method || 'post';
-
-	var pUser = '?api_key=' + key + '&username=' + user;
-	var path;
-
-	if(req.query.buyer) {
-		path = v1 + getUrl + productId + action + pUser + buyerId;
-	} else {
-		path = v1 + getUrl + productId + action + pUser; 
-	}
-
-	request(
-		{	method: method
-		, url: path				
-		}
-	, function(err, respond, body){
-			var data = JSON.parse(body);
-			if(data.message == 'Transaction done.') {
-				res.send({msg: 'ok'});
-			} else if(data.error) {
-				logger.error("transaction request failure, path:", path);
-				res.send({msg: 'failure'});
-			} else {
-				res.send(data);
-			}
-		}
-	);
-
-}
 
 exports.create = function(req, res){
 	res.render('create');
@@ -331,74 +285,7 @@ exports.product = function(req, res){
 
 };
 
-exports.createNew = function(req, res){
-
-	var key = req.session.key;
-	var user = req.session.user;
-	var pUser = '?api_key=' + key + '&username=' + user;
-	var path = v1 + getUrl + pUser;
-	var data = req.body;
-
-	var rawForm = {
-		bought_price: data.bought,
-		description: data.des,
-		gender: data.gender,
-		title: data.title,
-		size: data.size,
-		sold_price: data.sold,
-		product_status: data.status
-	};
-
-	var form =JSON.stringify(rawForm);
-
-	request(
-		{ method: 'POST',
-			uri: path, 
-			headers: {
-				'content-type': 'application/json; type=' + data.type
-			},
-			body: form
-		}, 
-		function(err, response, body){
-			if (!err && response.statusCode == 201) {
-				
-				var objID = response.headers.location.split('/');
-				var productID = objID[objID.length-2];
-				console.log('createBody:',form);
-				
-				res.send({
-					status: 'ok',
-					id: productID
-				});
-			
-			} else {
-				logger.error("create failure :", response);
-				res.send(null);
-			}
-		}
-	);
-}
-
-exports.uploadImg = function(req, res){
-	
-	var form = new formData();
-	var key = req.session.key;
-	var user = req.session.user;
-	var pUser = '?api_key=' + key + '&username=' + user;
-	var path = v1 + uploadImg + pUser;
-	var id = req.body.ObjectId //'5235ce660b36712d4f7ad36f'
-
-	form.append('image', fs.createReadStream(req.files.images.path));
-	form.append('ObjectId', id);
-	form.submit(path, function(err, response) {
-		if(err) throw err;
-		res.end('done!');
-	});
-
-}
-
 exports.getToken = function(req, res){
-
 	apiKey = req.query.api_key;
 	userName = req.query.username;
 	
@@ -425,10 +312,6 @@ exports.logout = function(req, res){
 	}
 }
 
-exports.landing = function(req, res) {
-	res.render('landing');
-}
-
 exports.feedback = function(req, res) {
   db.insert(req.body, function(err, newDoc){
     if(err) {
@@ -445,32 +328,4 @@ exports.feedback = function(req, res) {
     }
   });
 }
-
-exports.delProduct = function(req, res) {
-	
-  var id = req.params.id + '/';
-	var userKey = '?api_key='+ req.session.key;
-	var userName = '&username=' + req.session.user;
-	var path = v1 + getUrl + id + userKey + userName;
-  var isOwner;
-  
-  request.get(path, function(err, respond, body) { 
-		var product = JSON.parse(body);
-    if(req.session.user === product.seller.username) {
-      isOwner = true;
-    } else {
-      isOwner = false;
-    }
-  });
-
-  if(isOwner) {
-    request.del(path, function(err, respond, body) {
-      console.log('delBody:', body);
-      res.send({'msg': 'ok'});
-    });
-  } else {
-    res.send({'msg': 'Bad Attempt, You\'re not the owner.'});
-  }
-}
-
 

@@ -133,7 +133,7 @@
 
 	if($('#comments').length > 0) {
 		function changePluginUrl(value) {
-			var newVal = '<fb:comments href="http://tresor.tw/product/' + value + '/" num_posts="20" width="100%"></fb:comments>';
+			var newVal = '<fb:comments href="http://tresor.tw/product/' + value + '" num_posts="20" width="100%"></fb:comments>';
 			$('#comments').html(newVal);
 			FB.XFBML.parse($('#comments').get(0),function(){
 				$(".FB_Loader").remove();
@@ -162,7 +162,7 @@
 		'cosmeceutical': '藥妝',
 		'electronics': '3C產品',
 		'book': '一般書籍',
-		'textbook': '**教科書**',
+		'textbook': '教科書',
 		'others': '其他'
 	}
 
