@@ -24,7 +24,7 @@ body {
 #suggest
 {     
   bottom: 0;
-  right: 50;
+  right: 50px;
   position:fixed;
 }
 .feedback {
