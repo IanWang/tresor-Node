@@ -84,7 +84,12 @@ $(function() {
       	if(!getProductRunning) {
 					getProduct(query, ajaxCallback);
 				}
-      }
+      };
+			if($(window).width() >= 1650) {
+      	if(!getProductRunning) {
+					loadOnce(); 
+				}
+			};
     });
     $(window).trigger('scroll');
 	});
@@ -100,6 +105,11 @@ $(function() {
 		isEnd = false;
 		getProduct(query, ajaxCallback);
 	});
+
+	function loadOnce() {
+		loadOnce = Function("");
+		getProduct(query, ajaxCallback);
+	}
 
 });
 
