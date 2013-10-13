@@ -29,7 +29,7 @@ var getUrl = '/product/';
 var userUrl = '/user/';
 
 exports.index = function(req, res){
-	console.log('user in:', req.session.user, moment().format('lll'));
+	console.log('user in:', req.session.user + ' at ' + moment().format('lll'));
 	logger.info('user in:', req.session.user);
 	res.render('main');
 };
