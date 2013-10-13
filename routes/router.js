@@ -29,8 +29,9 @@ var getUrl = '/product/';
 var userUrl = '/user/';
 
 exports.index = function(req, res){
-	console.log('user in:', req.session.user + ' at ' + moment().format('lll'));
-	logger.info('user in:', req.session.user);
+	var ww = req.session.user + ' at ' + moment().format('lll');
+	console.log('user in:', ww);
+	logger.info('user in:', ww);
 	res.render('main');
 };
 

@@ -23,6 +23,22 @@ app.configure(function(){
 	app.use(express.cookieSession());
 	app.use(express.methodOverride());
 	app.use(app.router);
+
+	app.all('*',function(req, res, next) {
+		var faq = "http://tresor.tw/faq/";
+		if(req.session.user && req.session.key) {
+			var isAuth = true;
+		} else {
+			var isAuth = false;
+		}
+
+		if(isAuth || req.path === faq || req.path === '/token_register'){
+			next();
+		} else {
+			res.redirect(landing);
+		}
+	});
+
 });
 
 app.configure('development', function(){
@@ -30,42 +46,11 @@ app.configure('development', function(){
 	app.use(express.responseTime());
 	app.use(express.logger('dev'));
 	app.use(express.static(path.join(__dirname, 'public')));
-	app.all('*',function(req, res, next) {
-		var faq = "http://tresor.tw/faq/";
-		if(req.session.user && req.session.key) {
-			var isAuth = true;
-		} else {
-			var isAuth = false;
-		}
-
-		if(isAuth || req.path === faq || req.path === '/token_register'){
-			next();
-		} else {
-			res.redirect(landing);
-		}
-
-	});
 });
 
 app.configure('production', function(){
 	app.use(express.errorHandler()); 
 	app.use(express.responseTime());
-	app.all('*',function(req, res, next) {
-		var faq = "http://tresor.tw/faq/";
-
-		if(req.session.user && req.session.key) {
-			var isAuth = true;
-		} else {
-			var isAuth = false;
-		}
-
-		if(isAuth || req.path === faq || req.path === '/token_register'){
-			next();
-		} else {
-			res.redirect(landing);
-		}
-
-	});
 });
 
 app.get('/'               , router.index);
