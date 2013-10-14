@@ -2,7 +2,7 @@ body {
   background:url(/img/fbg.png) repeat;
   padding-top: 60px;
 }
-.top-warning {
+.top-warning, #guide {
   width: 100%;
   height: 100%;
   top: 0;
@@ -19,6 +19,26 @@ body {
 }
 .top-warning a {
   color: #d9230f;
+}
+#initGuide {
+	right: 100px;
+}
+#guide .wrapper {
+	width: 400px;
+	margin: 30px auto;
+}
+#guide .step:first-child {
+	margin-top: 8px;
+}
+#guide .step {
+	font-size: 14px;
+	font-weight: bold;
+	color: #b30000;
+	margin-bottom: 8px;
+}
+#guide .remove {
+	margin-left: 250px;
+	margin-top: 15px;
 }
 *{margin:0px;padding:0px;}
 #suggest

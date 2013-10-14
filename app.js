@@ -33,6 +33,7 @@ app.configure(function(){
 		}
 
 		if(isAuth || req.path === faq || req.path === '/token_register'){
+			console.log('req', req.headers['referer']);
 			next();
 		} else {
 			res.redirect(landing);

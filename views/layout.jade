@@ -81,34 +81,9 @@ html
       if(M && (tem= ua.match(/version\/([\.\d]+)/i))!= null) M[2]= tem[1];
       M= M? [M[1], M[2]]: [N, navigator.appVersion,'-?'];
       var b = M[0],  v = M[1];
-      var w = '<div class="top-warning"><div><h3>注意！！</h3><p>您所使用的瀏覽器過舊。可能導致某些功能無法正常運作</p><p>為享有最佳的體驗，我們強烈建議您使用<a href="http://www.google.com/intl/zh-TW/chrome/">Google Chrome</a>或是<a href="http://moztw.org/firefox/">Firefox</a></p><button class="btn btn-primary">我知道了</button></div></div>';
+      var w = '<div class="top-warning"><div><h3>注意！！</h3><p>您所使用的瀏覽器不被支援。可能導致某些功能無法正常運作</p><p>為享有最佳的體驗，我們強烈建議您使用<a href="http://www.google.com/intl/zh-TW/chrome/">Google Chrome</a>或是<a href="http://moztw.org/firefox/">Firefox</a></p><button class="btn btn-primary">我知道了</button></div></div>';
       if(b === 'MSIE' ) $('html').append(w);
     })();
     $('.top-warning button').click(function(){
       $('.top-warning').remove();
     });
-  //-
-    script.
-      (function($){
-        $(window).load(function(){
-          $("#cboxLoadedContent").mCustomScrollbar({
-            mouseWheel:true, 
-            mouseWheelPixels:"auto",
-            autoDraggerLength:true, 
-            autoHideScrollbar:false, 
-            scrollButtons:{ 
-              enable:false,
-              scrollSpeed:"auto", 
-              scrollAmount:60 
-            },
-            advanced:{
-              updateOnBrowserResize:true,
-              autoExpandHorizontalScroll:false,
-              autoScrollOnFocus:true,
-            },
-            theme:"light"
-          });
-        });
-      })(jQuery);
-              
-
