@@ -31,10 +31,11 @@ app.configure(function(){
 		} else {
 			var isAuth = false;
 		}
-		if(req.headers['referer'] === 'https://www.facebook.com/') {
-			console.log('qqwqwqwqw');	
-		}
-		console.log('req1', req.headers);
+		/*
+			if(req.headers['referer'] === 'https://www.facebook.com/') {
+				console.log('qqwqwqwqw');	
+			}
+		*/
 		if(isAuth || req.path === faq || req.path === '/token_register'){
 			next();
 		} else {
