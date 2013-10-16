@@ -66,6 +66,7 @@ app.get('/product/:id'    , router.product);
 app.get('/token_register' , router.getToken);
 app.get('/log_out'        , router.logout);
 app.post('/feedback'      , router.feedback);
+app.get('/advanceInfo'    , router.advance);
 
 app.get('/action'             , action.transaction);
 app.get('/product/:id/delete' , action.delProduct);

@@ -28,6 +28,21 @@ var logout = 'http://pa4373.ribosome.com.tw:8000/logout';
 var getUrl = '/product/';
 var userUrl = '/user/';
 
+exports.advance = function(req, res){
+
+	var key = req.session.key;
+	var user = req.session.user;
+	var filter = req.query.type || null;
+	var closed = '?transaction_status=closed';
+	var pUser = '&api_key=' + key + '&username=' + user;
+	var reqPath = v1 + getUrl + closed + pUser;
+  
+  request.get(reqPath, function(err, respond, body){
+		var data = JSON.parse(body);
+    res.send(data.meta);
+  })
+};
+
 exports.index = function(req, res){
 	var ww = req.session.user + ' at ' + moment().format('lll');
 	console.log('user in:', ww);
