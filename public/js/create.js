@@ -1,19 +1,10 @@
 var objId ;
-var data2 = JSON.stringify({
-	bought: 264,
-	des: "Birderly, like never before.",
-	gender: "M",
-	title: "Jeff Birdy18",
-	size: "XL",
-	sold: 300,
-	type: "book"
-});  
 
 Dropzone.options.myDropzone = {
 	paramName: "images",
 	maxFilesize: 4, // MB
 	addRemoveLinks: true,
-	dictRemoveFile: 'remove',
+	dictRemoveFile: '移除',
 	dictFileTooBig: '檔案上限為4MB',
 	parallelUploads: 10,
 	autoProcessQueue: false,
@@ -114,24 +105,25 @@ $(function() {
 							console.log(data);
 							console.log(objId);
 							myDropzone.processQueue();
-							alert('新增成功');
-							window.location = '/';
-
 						}
 					},
 					error: function(res){
-						window.alert('failure');
+						window.alert('failure\n'+res);
 					}
 				});
-			} else {
-				console.log('發佈取消');
 			}
 		}
 	});
 
 	myDropzone.on("sending", function(file, xhr, formData) {
-		//xhr.setRequestHeader('X-CSRFToken', 'wVhQO5n8ADeRzCNq8HnPT5qtQRIg7Hjl');
 		formData.append('ObjectId', objId);
+	});
+	myDropzone.on("error", function(file, err){
+    alert('something goes wrong:\n'+err);
+	});
+	myDropzone.on("success", function(file) {
+    alert('新增成功');
+    window.location = '/';
 	});
 
 });

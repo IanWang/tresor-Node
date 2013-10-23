@@ -75,8 +75,11 @@ exports.uploadImg = function(req, res){
 	form.append('image', fs.createReadStream(req.files.images.path));
 	form.append('ObjectId', id);
 	form.submit(path, function(err, response) {
-		if(err) throw err;
-		res.end('done!');
+		if(err) { 
+      res.send(err);
+    } else {
+      res.send('done');
+    }
 	});
 
 }
