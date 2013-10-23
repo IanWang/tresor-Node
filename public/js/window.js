@@ -103,7 +103,12 @@ $(function() {
 			}
 			return null;
 		},
-		delete: function(f) {
+		getVal: function(g) {
+			var f = document.cookie.indexOf(";", g);
+			if (f == -1) f = document.cookie.length;
+			return unescape(document.cookie.substring(g, f));
+		},
+		delete2: function(f) {
 			this.set(f, "", - 1);
 		}
 	}
@@ -128,7 +133,7 @@ $(function() {
     });
     $(window).trigger('scroll');
 		if(e.cookie.get('guide')) {
-			alert('has cookie');
+			return;
 		} else {
 			$('#initGuide').click();
 			e.cookie.set('guide', 'true', 7);

@@ -39,7 +39,27 @@ exports.advance = function(req, res){
   
   request.get(reqPath, function(err, respond, body){
 		var data = JSON.parse(body);
-    res.send(data.meta);
+    var total = data.meta.total_count || 0;
+		var products = [];
+
+		data.objects.forEach(function(ele){
+			var single = {};
+			single.buyer = {};
+			single.title = ele.title;
+			single.buyer.id = ele.buyer.id;
+			single.buyer.name = ele.buyer.facebook_name;
+			single.buyer.image = ele.buyer.image_small;
+			single.date = moment(ele.date_closed).format('lll');
+			products.push(single);
+
+		});
+		
+		var form = {
+			'total': total,
+			'items': products
+		}
+
+		res.send(form);
   })
 };
 

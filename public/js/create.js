@@ -102,8 +102,6 @@ $(function() {
 					success: function(data){
 						if(data.status && data.id) {
 							objId = data.id;
-							console.log(data);
-							console.log(objId);
 							myDropzone.processQueue();
 						}
 					},
@@ -119,7 +117,7 @@ $(function() {
 		formData.append('ObjectId', objId);
 	});
 	myDropzone.on("error", function(file, err){
-    alert('something goes wrong:\n'+err);
+    alert('failure:\n'+err);
 	});
 	myDropzone.on("success", function(file) {
     alert('新增成功');

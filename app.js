@@ -1,5 +1,6 @@
 
 var express    = require('express')
+//	,	inbound		 = require('inbound')
   , router     = require('./routes/router')
   , action     = require('./routes/action')
   , newProduct = require('./routes/newProduct')
@@ -12,6 +13,17 @@ var config  = require('./config/index'),
     landing = config.login,
     ip      = config.ip,
     env     = config.env;
+
+/*
+app.use(function (req, res, next) {
+	var referrer = req.header('referrer');
+	var href = req.url;
+	inbound.referrer.parse(href, referrer, function (err, desc) {
+		req.referrer = desc;
+		next(err);
+	});
+});
+*/
 
 // all environments
 app.configure(function(){
@@ -26,16 +38,19 @@ app.configure(function(){
 
 	app.all('*',function(req, res, next) {
 		var faq = "http://tresor.tw/faq/";
+		/*
+		var fromType = req.referrer.referrer.type;
+		if(fromType === 'direct') {
+			req.session.key = '4b0fe1152e54e13393f6326c793401321465db93';
+			req.session.user = 'ianwang54';
+		}
+		*/
 		if(req.session.user && req.session.key) {
 			var isAuth = true;
 		} else {
 			var isAuth = false;
 		}
-		/*
-			if(req.headers['referer'] === 'https://www.facebook.com/') {
-				console.log('qqwqwqwqw');	
-			}
-		*/
+
 		if(isAuth || req.path === faq || req.path === '/token_register'){
 			next();
 		} else {
@@ -56,6 +71,7 @@ app.configure('production', function(){
 	app.use(express.errorHandler()); 
 	app.use(express.responseTime());
 });
+
 
 app.get('/'               , router.index);
 app.get('/allProduct'     , router.allProduct);

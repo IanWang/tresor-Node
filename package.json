@@ -1,6 +1,6 @@
 {
   "name": "tresor",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "private": true,
   "scripts": {
     "start": "node app.js"
@@ -14,7 +14,8 @@
     "winston": "~0.7.2",
     "grunt-contrib-cssmin": "~0.6.2",
     "nedb": "~0.8.9",
-    "nconf": "~0.6.7"
+    "nconf": "~0.6.7",
+    "inbound": "0.0.6"
   },
   "devDependencies": {
     "grunt-contrib-clean": "~0.5.0",
