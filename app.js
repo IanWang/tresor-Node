@@ -38,13 +38,6 @@ app.configure(function(){
 
 	app.all('*',function(req, res, next) {
 		var faq = "http://tresor.tw/faq/";
-		/*
-		var fromType = req.referrer.referrer.type;
-		if(fromType === 'direct') {
-			req.session.key = '4b0fe1152e54e13393f6326c793401321465db93';
-			req.session.user = 'ianwang54';
-		}
-		*/
 		if(req.session.user && req.session.key) {
 			var isAuth = true;
 		} else {
