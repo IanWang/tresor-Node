@@ -67,7 +67,8 @@ exports.index = function(req, res){
 	var ww = req.session.user + ' at ' + moment().format('lll');
 	console.log('user in:', ww);
 	logger.info('user in:', ww);
-	res.render('main');
+	//res.render('main');
+  res.render('index');
 };
 
 exports.allProduct = function(req, res){

@@ -36,6 +36,7 @@ app.configure(function(){
 	app.use(express.methodOverride());
 	app.use(app.router);
 
+  /*
 	app.all('*',function(req, res, next) {
 		var faq = "http://tresor.tw/faq/";
 		if(req.session.user && req.session.key) {
@@ -50,6 +51,7 @@ app.configure(function(){
 			res.redirect(landing);
 		}
 	});
+  */
 
 });
 

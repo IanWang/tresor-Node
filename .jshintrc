@@ -1,0 +1,33 @@
+{
+    "curly": true,
+    "camelcase": false,
+    "eqnull": true,
+    "eqeqeq": true,
+    "latedef": true,
+    "undef": true,
+    "newcap": true,
+    "quotmark": "single",
+    "node": true,
+    "es5": true,
+    "latedef":false,
+    "sub":true,
+    "strict":false,
+    "multistr":true,
+    "strict" : false,
+    "indent": 4,
+    "globals": {
+        "jQuery": false,
+        "$": false,
+        "window": false,
+        "confirm": false,
+        "alert": false,
+        "p": false,
+        "BankersBox": false,
+        "document": false,
+        "location": false,
+        "Handlebars": false,
+        "bootData": false,
+        "wysihtml5": false,
+        "wysihtml5ParserRules": false
+    }
+}

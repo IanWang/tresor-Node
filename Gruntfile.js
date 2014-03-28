@@ -1,84 +1,88 @@
+var path = require('path');
 
 module.exports = function(grunt) {
+  grunt.initConfig({
+    pkg: grunt.file.readJSON( 'package.json' ),
 
-	grunt.initConfig({
+    jshint: {
+      files: [
+        'app.js',
+        'public/js/app/*.js'
+      ],
+      options: {
+        jshintrc: '.jshintrc'
+      }
+    },
+    emberTemplates: {
+      compile: {
+        options: {
+          templateBasePath: /app\/templates\//
+        },
+        files: {
+          'build/templates.js': 'app/templates/**/*.hbs'
+        }
+      }
+    },
+    // not ready yet!
+    concat: {
+      libs: {
+        src: [
+          'vendor/js/libs/jquery-2.0.3.min.js',
+          'vendor/js/libs/createUsersInLocalStorage.js',
+          'vendor/js/libs/handlebars-1.0.0.js',
+          'vendor/js/libs/ember-1.1.2.js',
+          'vendor/js/libs/ember-data-1.0.0-beta.3.js',
+          'vendor/js/libs/localstorage_adapter.js',
+          'vendor/js/libs/moment.min.js'
+        ],
+        dest: 'vendor/js/libs.js'
+      },
+      app: {
+        src: 'vendor/js/app/**/*.js',
+        dest: 'vendor/js/app.js'
+      }
+    },
 
-		pkg: grunt.file.readJSON('package.json'),
-		uglify: {
-			options: {
-				banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
-						    '<%= grunt.template.today("yyyy-mm-dd") %> */',
-				mangle: {
-					except: ['bootstrap']
-				}
-			},
-			main: {
-				files: [{
-					src: 'public/js/create.js',
-					dest: "public/build/js/create.js"
-				}, {
-					src: 'public/js/product.js',
-					dest: "public/build/js/product.js"
-				}, {
-					src: 'public/js/window.js',
-					dest: "public/build/js/window.js"
-				}, {
-					src: 'public/js/feedback.js',
-					dest: "public/build/js/feedback.js"
-				}, {
-					src: 'public/js/user.js',
-					dest: "public/build/js/user.js"
-				}]
-			}
-		},
+    watch: {
+      files: [
+        'app.js',
+        'public/js/**/*.js'
+      ],
+      emberTemplates: {
+        files: 'app/templates/**/*.hbs',
+        tasks: ['emberTemplates']
+      }
+    },
 
-		cssmin: {
-			add_banner: {
-				options: {
-					banner: '<%= uglify.options.banner %>'
-				},
-				files: [{
-					src: 'public/css/popup_window.css',
-					dest: "public/build/css/popup_window.css"
-				}, {
-					src: 'public/css/user.css',
-					dest: "public/build/css/user.css"
-				}, {
-					src: 'public/css/layout.css',
-					dest: "public/build/css/layout.css"
-				}, { 
-					src: 'public/css/window.css',
-					dest: "public/build/css/window.css"
-				}]
-		 	}
-		},
+    bower: {
+      install: {
+        options: {
+          copy: false,
+          verbose: true
+        }
+      }
+    }
 
-		clean: [
-			"public/build/js/*.js",
-			"public/build/css/popup_window.css",
-			"public/build/css/user.css",
-			"public/build/css/window.css",
-		],
+    /*
+    connect: {
+      server: {
+        options: {
+          port: 3000,
+          base: path.join(__dirname, '..')
+        }
+      }
+    }
+    */
+  });
 
-		watch: {
-			files: [
-				'app.js', 
-				'Gruntfile.js', 
- 				'public/js/**/*.js'
-			],
-			tasks: (function() {
-				var tasks = ['clean', 'uglify'];
-				return tasks;
-			})()
-		}
-	});
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-ember-templates');
+  grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-bower-task');
 
-	grunt.loadNpmTasks('grunt-contrib-uglify');
-	grunt.loadNpmTasks('grunt-contrib-cssmin');
-	grunt.loadNpmTasks('grunt-contrib-clean');
-	grunt.loadNpmTasks('grunt-contrib-watch');
-
-	grunt.registerTask('default', ['clean', 'uglify', 'cssmin']);
-
+  // Default task(s).
+  grunt.registerTask('default', ['emberTemplates', 'bower', 'watch']);
 };
-

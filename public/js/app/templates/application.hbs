@@ -1,0 +1,98 @@
+    <div class='navbar small-12'>
+        <div class='large-11 small-12'>
+          <div class='search'>
+            <input type='text' placeholder='search'>
+          </div>
+          <div class='system-fn-group'> 
+            <ul class='button-group radius'>
+              <li>
+                {{#link-to 'create' classNames='create-ts button success'}}
+                  <img src='img/icons/20.png'>
+                  我要賣東西
+                {{/link-to}}
+                </li> 
+              <li>
+                <a href='#' class='notification button secondary'>
+                  <img src='img/icons/15.png'>
+                </a>
+              </li>
+              <li> 
+                {{#link-to 'settings' classNames='setting button secondary'}}<img src='img/icons/16.png'>{{/link-to}} 
+              </li>
+            </ul>
+          </div>
+          {{#link-to 'products' classNames='logo'}}
+            <img src='img/logo.png'>
+          {{/link-to}}
+
+          <div class='sub-navbar small-12'>
+            <div class='large-11 small-12'>
+
+            <div class='routers'>
+              <div class='route-products'>
+                <img src='img/icons/19.png'>
+                <span class='browsing'>瀏覽商品</span>
+              </div>
+              <div class='route-following'>
+                <img src='img/icons/15.png'>
+                <span>我的追蹤</span>
+              </div>
+            </div>
+            <div class='filter-group'>
+              <a href="#" data-dropdown="filter-school">
+                學校
+                <img src='img/icons/down-arrow.png'>
+              </a>
+              <ul id="filter-school" class="f-dropdown" data-dropdown-content>
+                <li><a href="#">This is a link</a></li>
+                <li><a href="#">This is another</a></li>
+                <li><a href="#">Yet another</a></li>
+              </ul>
+              <a href="#" data-dropdown="filter-category">
+                商品類別
+                <img src='img/icons/down-arrow.png'>
+              </a>
+              <ul id="filter-category" class="f-dropdown" data-dropdown-content>
+                <li><a href="#">This is a link</a></li>
+                <li><a href="#">This is another</a></li>
+                <li><a href="#">Yet another</a></li>
+              </ul>
+              <a href="#" data-dropdown="filter-gender">
+                性別
+                <img src='img/icons/down-arrow.png'>
+              </a>
+              <ul id="filter-gender" class="f-dropdown" data-dropdown-content>
+                <li><a href="#">This is a link</a></li>
+                <li><a href="#">This is another</a></li>
+                <li><a href="#">Yet another</a></li>
+              </ul>
+              <a href="#" data-dropdown="filter-sort">
+                排序依據
+                <img src='img/icons/down-arrow.png'>
+              </a>
+              <ul id="filter-sort" class="f-dropdown" data-dropdown-content>
+                <li><a href="#">This is a link</a></li>
+                <li><a href="#">This is another</a></li>
+                <li><a href="#">Yet another</a></li>
+              </ul>
+            </div>
+
+            <div class='guide'>
+              <a href='#'>
+                使用指南
+                <img src='img/icons/09.png'>
+              </a>
+            </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+  <div class='container'>    
+
+      {{outlet}}
+
+  </div>
+
+
+

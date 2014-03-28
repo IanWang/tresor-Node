@@ -1,0 +1,53 @@
+<div class="row">
+  <div class="large-12 columns text-center">
+    <h2>新增商品</h2>
+    <p>送出以下資訊，立即刊登你的二手商品</p>
+  </div>
+</div>
+<!-- TODO: Apply ID on elements -->
+<form action="">
+  <div class="row">
+    <div class="large-6 columns">
+      <input type="text" placeholder="商品名稱 (必填)">
+      <select name="" id="">
+        <option value="male">男</option>
+        <option value="female">女</option>
+      </select>
+      <!-- responsive form according to product type -->
+      {{view Ember.Select content=product_types
+                          value=current_product_type
+                          optionValuePath="content.value"
+                          optionLabelPath="content.label"}}
+      <!-- specific element for clothes -->
+      {{#if typeIsClothes}}
+        {{view Ember.Select content=cloth_sizes}}
+      {{/if}}
+      <!-- specific elements for shoes -->
+      {{#if typeIsShoes}}
+        <input type="number" placeholder="尺寸 (必填，請輸入歐碼)">
+        <p>
+          <a href="#" data-reveal data-reveal-id="shoe_size_table">鞋碼轉換表</a>
+        </p>
+      {{/if}}
+      <input type="text" placeholder="商品狀態 (必填，限 15 字內)">
+      <input type="number" placeholder="買入價格">
+      <input type="number" placeholder="欲售價格 (必填)">
+      <textarea name="" id="" cols="30" rows="10" placeholder="商品敘述或補充說明"></textarea>
+    </div>
+    <div class="large-6 columns">
+      <p>Image Uploader</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="large-6 columns">
+      <input class="button" type="submit" value="&plus; 發佈">
+    </div>
+  </div>
+</form>
+
+<!-- modal window: shoe size table -->
+<div id="shoe_size_table" class="reveal-modal" data-reveal>
+  <h1>鞋碼轉換表</h1>
+  <img src="http://tresor.tw/img/size-chart.jpg" alt="shoe size table">
+  <a class="close-reveal-modal">&#215;</a>
+</div>

@@ -12,5 +12,6 @@ logs
 node_modules/
 db/
 results
+public/vendor/
 
 npm-debug.log

@@ -1,0 +1,20 @@
+
+			<div class="main">
+				<ul id="ts-grid" class="ts-grid">
+
+          {{#each model}}
+            <li>
+              <a {{ bind-attr class=':square' href='href' data-largesrc='large_path' data-title='title' data-description='description' data-smallsrc='small_path' }}>
+                <div class='ts-mini-info'>
+                  <h1 class='ts-mini-title'>{{title}}</h1>
+                  <p class='ts-mini-price'>${{price}}</p>
+                </div>
+              </a>
+            </li>
+          {{/each}}
+
+
+        </ul>
+      </div>
+    
+

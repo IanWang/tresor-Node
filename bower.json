@@ -1,0 +1,23 @@
+{
+  "name": "tresor-Node",
+  "version": "0.1.1",
+  "homepage": "https://github.com/IanWang/tresor-Node",
+  "authors": [
+    "Ian Wang <gogoenwon@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "foundation": "~5.2.1",
+    "ember": "~1.4.0"
+  },
+  "resolutions": {
+    "jquery": ">= 1.7 <= 2.1"
+  }
+}
