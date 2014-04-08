@@ -12,7 +12,11 @@ module.exports = (grunt) ->
       bare: true
     development:
       files:
-        'js/build/app.js': 'js/app/**/*.coffee'
+        'js/build/app.js': [
+          'js/app/lib/**/*.coffee'
+          'js/app/**/init.coffee'
+          'js/app/**/*.coffee'
+        ]
 
   config.emberTemplates =
     development:
