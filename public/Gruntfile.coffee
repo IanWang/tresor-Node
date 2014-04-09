@@ -39,6 +39,9 @@ module.exports = (grunt) ->
     coffeescript:
       files: 'js/app/**/*.coffee'
       tasks: ['coffee']
+    emberTemplates:
+      files: 'js/app/templates/**/*.hbs'
+      tasks: ['emberTemplates']
 
   grunt.initConfig config
 
