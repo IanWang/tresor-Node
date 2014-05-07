@@ -28,7 +28,6 @@ var logout = 'http://pa4373.ribosome.com.tw:8000/logout';
 */
 
 router.get('/', function(req, res) {
-  console.log('yoloo');
   res.render('index');
 });
 

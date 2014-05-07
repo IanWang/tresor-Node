@@ -44,9 +44,6 @@ if( env === 'development') {
   });
 };
 
-if( env === 'production' ) {
-};
-
 
 app.use('/', routes);
 /*
@@ -75,28 +72,22 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-// development error handler
-// will print stacktrace
-if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
-    });
-  });
-}
-
-// production error handler
-// no stacktraces leaked to user
 app.use(function(err, req, res, next) {
+
+  var error = (app.get('env') === 'development') ?
+    err : {};
+    // development error handler
+    // will print stacktrace
+        // production error handler
+        // no stacktraces leaked to user
+
   res.status(err.status || 500);
   res.render('error', {
     message: err.message,
-    error: {}
+    error: err
   });
-});
 
+});
 
 module.exports = app;
 
