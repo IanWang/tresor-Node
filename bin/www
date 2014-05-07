@@ -1,0 +1,17 @@
+#!/usr/bin/env node
+var debug = require('debug')('tresor');
+var app = require('../app');
+
+var config  = require('../config/index'),
+    apiUrl  = config.apiUrl,
+    landing = config.login,
+    ip      = config.ip,
+    env     = config.env;
+
+app.set('port', process.env.PORT || 3001);
+
+var server = app.listen(app.get('port'), function() {
+  debug('[' + env + '] tresor is on port ' + server.address().port);
+  debug('apiUrl:', apiUrl);
+  debug('IP:', ip);
+});

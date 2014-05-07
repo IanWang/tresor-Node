@@ -1,73 +1,55 @@
 
-var express    = require('express')
-//	,	inbound		 = require('inbound')
-  , router     = require('./routes/router')
-  , action     = require('./routes/action')
-  , newProduct = require('./routes/newProduct')
-  , http       = require('http')
-  , path       = require('path');
+// Module
+var express        = require('express'),
+    http           = require('http'),
+    path           = require('path'),
+    favicon        = require('static-favicon'),
+    morgan         = require('morgan'),
+    cookieParser   = require('cookie-parser'),
+    bodyParser     = require('body-parser'),
+    session        = require('express-session'),
+    //session      = require('cookie-session'),
+    methodOverride = require('method-override');
 
-var app     = express();
-var config  = require('./config/index'),
-    apiUrl  = config.apiUrl,
-    landing = config.login,
-    ip      = config.ip,
-    env     = config.env;
+// Routing
+var routes     = require('./routes/index'),
+    action     = require('./routes/action'),
+    newProduct = require('./routes/newProduct');
 
+var app         = express();
+var memoryStore = session.MemoryStore;
+
+
+app.set('views', path.join(__dirname, '/views'));
+app.set('view engine', 'jade');
+
+app.use(favicon());
+app.use(morgan('dev'));           
+app.use(cookieParser('secret-of-tresor'));
+app.use(bodyParser());
+app.use(methodOverride());      
+app.use(session({ 
+  key: 'secret-of-tresor',
+  cookie: { httpOnly: true, secure: true },
+  store: new memoryStore()
+}));
+app.use(express.static(path.join(__dirname + '/public')));   
+
+var env = process.env.NODE_ENV || 'development';
+
+if( env === 'development') {
+  app.use(function(req, res, next) {
+    console.log('auth');
+    next();
+  });
+};
+
+if( env === 'production' ) {
+};
+
+
+app.use('/', routes);
 /*
-app.use(function (req, res, next) {
-	var referrer = req.header('referrer');
-	var href = req.url;
-	inbound.referrer.parse(href, referrer, function (err, desc) {
-		req.referrer = desc;
-		next(err);
-	});
-});
-*/
-
-// all environments
-app.configure(function(){
-	app.set('port', process.env.PORT || 3000);
-	app.set('views', __dirname + '/views');
-	app.set('view engine', 'jade');
-	app.use(express.bodyParser());
-	app.use(express.cookieParser('Secret-of-tresor-Login'));
-	app.use(express.cookieSession());
-	app.use(express.methodOverride());
-	app.use(app.router);
-
-  /*
-	app.all('*',function(req, res, next) {
-		var faq = "http://tresor.tw/faq/";
-		if(req.session.user && req.session.key) {
-			var isAuth = true;
-		} else {
-			var isAuth = false;
-		}
-
-		if(isAuth || req.path === faq || req.path === '/token_register'){
-			next();
-		} else {
-			res.redirect(landing);
-		}
-	});
-  */
-
-});
-
-app.configure('development', function(){
-  app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
-	app.use(express.responseTime());
-	app.use(express.logger('dev'));
-	app.use(express.static(path.join(__dirname, 'public')));
-});
-
-app.configure('production', function(){
-	app.use(express.errorHandler()); 
-	app.use(express.responseTime());
-});
-
-
 app.get('/'               , router.index);
 app.get('/allProduct'     , router.allProduct);
 app.get('/userProduct'    , router.userProduct);
@@ -84,9 +66,37 @@ app.get('/product/:id/delete' , action.delProduct);
 
 app.post('/create' , newProduct.createNew);
 app.post('/upload' , newProduct.uploadImg);
+*/
+
+/// catch 404 and forwarding to error handler
+app.use(function(req, res, next) {
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+});
+
+// development error handler
+// will print stacktrace
+if (app.get('env') === 'development') {
+  app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+      message: err.message,
+      error: err
+    });
+  });
+}
+
+// production error handler
+// no stacktraces leaked to user
+app.use(function(err, req, res, next) {
+  res.status(err.status || 500);
+  res.render('error', {
+    message: err.message,
+    error: {}
+  });
+});
 
 
-http.createServer(app).listen(3000, ip);
-console.log('[' + env +'] tresor is on port ' + app.get('port'));
-console.log('apiUrl:', apiUrl);
-console.log('IP:', ip);
+module.exports = app;
+

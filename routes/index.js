@@ -1,12 +1,14 @@
 
+var express   = require('express');
+var router    = express.Router();
 var request   = require('request');
 var fs        = require('fs');
 var moment    = require('moment');
-var Datastore = require('nedb')
-  , db        = new Datastore({
+var Datastore = require('nedb'),
+    db        = new Datastore({
     filename: 'db/feedback.json', 
     autoload: true
-  })
+  });
 
 var config = require('../config/index'),
     apiUrl = config.apiUrl,
@@ -25,9 +27,16 @@ var v1 = 'http://pa4373.ribosome.com.tw:8000/api/v1';
 var logout = 'http://pa4373.ribosome.com.tw:8000/logout';
 */
 
+router.get('/', function(req, res) {
+  console.log('yoloo');
+  res.render('index');
+});
+
+module.exports = router;
+
+/*
 var getUrl = '/product/';
 var userUrl = '/user/';
-
 exports.advance = function(req, res){
 
 	var key = req.session.key;
@@ -364,4 +373,4 @@ exports.feedback = function(req, res) {
     }
   });
 }
-
+*/
